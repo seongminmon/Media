@@ -1,13 +1,14 @@
 //
-//  SearchCollectionViewCell.swift
+//  SimilarCollectionViewCell.swift
 //  Media
 //
 //  Created by 김성민 on 6/24/24.
 //
 
 import UIKit
+import SnapKit
 
-class SearchCollectionViewCell: UICollectionViewCell {
+class SimilarCollectionViewCell: UICollectionViewCell {
     
     let profileImageView = UIImageView()
     
@@ -43,4 +44,3 @@ class SearchCollectionViewCell: UICollectionViewCell {
         profileImageView.kf.setImage(with: data?.posterImageURL)
     }
 }
-
