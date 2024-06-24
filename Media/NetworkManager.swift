@@ -47,4 +47,22 @@ class NetworkManager {
         }
     }
     
+    func searchRequest(query: String, page: Int, completionHandler: @escaping (Result<MovieResponse, AFError>) -> Void) {
+        print(#function)
+        let url = APIURL.searchURL
+        let parameters: Parameters = [
+            "query" : query,
+            "page" : page
+        ]
+        let headers: HTTPHeaders = [
+            "accept": "application/json",
+            "Authorization": APIKey.accessTokenAuth
+        ]
+        
+        AF.request(url, method: .get, parameters: parameters, headers: headers)
+            .responseDecodable(of: MovieResponse.self) { response in
+            completionHandler(response.result)
+        }
+    }
+    
 }

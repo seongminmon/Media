@@ -9,7 +9,7 @@ import UIKit
 
 struct MovieResponse: Decodable {
     let page: Int
-    let movieList: [Movie]
+    var movieList: [Movie]
     let totalPages: Int
     let totalResults: Int
 
@@ -33,7 +33,7 @@ struct Movie: Decodable {
     //
     let originalLanguage: String
     let originalTitle: String
-    let mediaType: String
+    let mediaType: String?
     let adult: Bool
     let backdropPath: String?
     let popularity: Double

@@ -47,7 +47,6 @@ class TrendViewController: UIViewController {
     }
     
     @objc func menuButtonTapped() {
-        print(#function)
         let alert = UIAlertController(
             title: nil,
             message: nil,
@@ -65,7 +64,8 @@ class TrendViewController: UIViewController {
     }
     
     @objc func searchButtonTapped() {
-        print(#function)
+        let vc = SearchViewController()
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     func addSubviews() {

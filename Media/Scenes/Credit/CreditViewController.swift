@@ -24,6 +24,15 @@ enum Sections: Int, CaseIterable {
         case .crew: "Crew"
         }
     }
+    
+    var rowHeight: CGFloat {
+        switch self {
+        case .main: 200
+        case .overview: 60
+        case .cast: 80
+        case .crew: 80
+        }
+    }
 }
 
 class CreditViewController: UIViewController {
@@ -35,28 +44,29 @@ class CreditViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureNavigationBar()
-        configureHierarchy()
-        configureLayout()
-        configureTableView()
         callRequest()
+        
+        setNavi()
+        addSubviews()
+        setLayout()
+        setTableView()
     }
     
-    func configureNavigationBar() {
+    func setNavi() {
         navigationItem.title = "출연/제작"
     }
     
-    func configureHierarchy() {
+    func addSubviews() {
         view.addSubview(tableView)
     }
     
-    func configureLayout() {
+    func setLayout() {
         tableView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
     }
     
-    func configureTableView() {
+    func setTableView() {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(MainCreditCell.self, forCellReuseIdentifier: MainCreditCell.identifier)
@@ -104,6 +114,10 @@ extension CreditViewController: UITableViewDelegate, UITableViewDataSource {
         }
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return Sections.allCases[indexPath.section].rowHeight
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch Sections.allCases[indexPath.section] {
         case .main:
@@ -131,13 +145,4 @@ extension CreditViewController: UITableViewDelegate, UITableViewDataSource {
             return cell
         }
     }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        switch Sections.allCases[indexPath.section] {
-        case .main: 200
-        case .overview: 60
-        case .cast, .crew: 80
-        }
-    }
-    
 }
