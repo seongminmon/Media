@@ -31,7 +31,7 @@ class NetworkManager {
     }
     
     func creditRequest(movieId: Int, completionHandler: @escaping (Result<Credit, AFError>) -> Void) {
-        APIURL.movieId = movieId
+        APIURL.creditMovieId = movieId
         let url = APIURL.creditURL
 //        let parameters: Parameters = [
 //            "language" : "en-US"
@@ -68,6 +68,25 @@ class NetworkManager {
         print(#function)
         APIURL.similarMovieId = movieId
         let url = APIURL.similarURL
+        let parameters: Parameters = [
+            "language" : "en-US",
+            "page" : page
+        ]
+        let headers: HTTPHeaders = [
+            "accept": "application/json",
+            "Authorization": APIKey.accessTokenAuth
+        ]
+        
+        AF.request(url, method: .get, parameters: parameters, headers: headers)
+            .responseDecodable(of: MovieResponse.self) { response in
+            completionHandler(response.result)
+        }
+    }
+    
+    func recommendRequest(movieId: Int, page: Int, completionHandler: @escaping (Result<MovieResponse, AFError>) -> Void) {
+        print(#function)
+        APIURL.similarMovieId = movieId
+        let url = APIURL.recommendURL
         let parameters: Parameters = [
             "language" : "en-US",
             "page" : page
