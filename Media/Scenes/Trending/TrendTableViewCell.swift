@@ -11,8 +11,6 @@ import SnapKit
 
 class TrendTableViewCell: UITableViewCell {
     
-    static let identifier = "TrendTableViewCell"
-    
     let dateLabel = UILabel()
     let genreLabel = UILabel()
     
@@ -162,6 +160,7 @@ class TrendTableViewCell: UITableViewCell {
         
         genreLabel.font = .boldSystemFont(ofSize: 14)
         
+        posterImageView.backgroundColor = .gray
         posterImageView.contentMode = .scaleAspectFill
         
         shareButton.setImage(UIImage(systemName: "paperclip"), for: .normal)

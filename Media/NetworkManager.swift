@@ -30,4 +30,21 @@ class NetworkManager {
         }
     }
     
+    func creditRequest(movieId: Int, completionHandler: @escaping (Result<Credit, AFError>) -> Void) {
+        APIURL.movieId = movieId
+        let url = APIURL.creditURL
+//        let parameters: Parameters = [
+//            "language" : "en-US"
+//        ]
+        let headers: HTTPHeaders = [
+            "accept": "application/json",
+            "Authorization": APIKey.accessTokenAuth
+        ]
+        
+        AF.request(url, method: .get, headers: headers)
+            .responseDecodable(of: Credit.self) { response in
+            completionHandler(response.result)
+        }
+    }
+    
 }
