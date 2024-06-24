@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		24356AA02C2938C3000D2DF1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24356A9F2C2938C3000D2DF1 /* AppDelegate.swift */; };
 		24356AA22C2938C3000D2DF1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24356AA12C2938C3000D2DF1 /* SceneDelegate.swift */; };
-		24356AA42C2938C3000D2DF1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24356AA32C2938C3000D2DF1 /* ViewController.swift */; };
+		24356AA42C2938C3000D2DF1 /* TrendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24356AA32C2938C3000D2DF1 /* TrendViewController.swift */; };
 		24356AA92C2938C4000D2DF1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 24356AA82C2938C4000D2DF1 /* Assets.xcassets */; };
 		24356AAC2C2938C4000D2DF1 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 24356AAB2C2938C4000D2DF1 /* Base */; };
 		24356AB42C2938D5000D2DF1 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 24356AB32C2938D5000D2DF1 /* .gitignore */; };
@@ -17,18 +17,20 @@
 		24356ABB2C293B2F000D2DF1 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 24356ABA2C293B2F000D2DF1 /* SnapKit */; };
 		24356ABE2C293B3D000D2DF1 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 24356ABD2C293B3D000D2DF1 /* Alamofire */; };
 		24356AC12C293B53000D2DF1 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 24356AC02C293B53000D2DF1 /* Kingfisher */; };
+		24356AC32C2941F6000D2DF1 /* TrendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24356AC22C2941F5000D2DF1 /* TrendTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		24356A9C2C2938C3000D2DF1 /* Media.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Media.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		24356A9F2C2938C3000D2DF1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		24356AA12C2938C3000D2DF1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		24356AA32C2938C3000D2DF1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		24356AA32C2938C3000D2DF1 /* TrendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendViewController.swift; sourceTree = "<group>"; };
 		24356AA82C2938C4000D2DF1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		24356AAB2C2938C4000D2DF1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		24356AAD2C2938C4000D2DF1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		24356AB32C2938D5000D2DF1 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		24356AB72C29391A000D2DF1 /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
+		24356AC22C2941F5000D2DF1 /* TrendTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,7 +70,8 @@
 				24356A9F2C2938C3000D2DF1 /* AppDelegate.swift */,
 				24356AA12C2938C3000D2DF1 /* SceneDelegate.swift */,
 				24356AB72C29391A000D2DF1 /* APIKey.swift */,
-				24356AA32C2938C3000D2DF1 /* ViewController.swift */,
+				24356AA32C2938C3000D2DF1 /* TrendViewController.swift */,
+				24356AC22C2941F5000D2DF1 /* TrendTableViewCell.swift */,
 				24356AA82C2938C4000D2DF1 /* Assets.xcassets */,
 				24356AAA2C2938C4000D2DF1 /* LaunchScreen.storyboard */,
 				24356AAD2C2938C4000D2DF1 /* Info.plist */,
@@ -157,7 +160,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				24356AA42C2938C3000D2DF1 /* ViewController.swift in Sources */,
+				24356AA42C2938C3000D2DF1 /* TrendViewController.swift in Sources */,
+				24356AC32C2941F6000D2DF1 /* TrendTableViewCell.swift in Sources */,
 				24356AA02C2938C3000D2DF1 /* AppDelegate.swift in Sources */,
 				24356AB82C29391A000D2DF1 /* APIKey.swift in Sources */,
 				24356AA22C2938C3000D2DF1 /* SceneDelegate.swift in Sources */,
