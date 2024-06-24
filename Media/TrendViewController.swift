@@ -6,24 +6,29 @@
 //
 
 import UIKit
+import Alamofire
 import SnapKit
+
+enum TimeWindow: String {
+    case day
+    case week
+}
 
 class TrendViewController: UIViewController {
     
     let tableView = UITableView()
     
+    var timeWindow: TimeWindow = .day {
+        didSet {
+            navigationItem.title = timeWindow.rawValue
+            callRequest()
+        }
+    }
+    var movieResponse: MovieResponse?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        NetworkManager.shared.trendingRequest(timeWindow: "day") { result in
-            switch result {
-            case .success(let value):
-                dump(value)
-                
-            case .failure(let error):
-                dump(error)
-            }
-        }
+        callRequest()
         
         setNavi()
         addSubviews()
@@ -43,6 +48,20 @@ class TrendViewController: UIViewController {
     
     @objc func menuButtonTapped() {
         print(#function)
+        let alert = UIAlertController(
+            title: nil,
+            message: nil,
+            preferredStyle: .actionSheet
+        )
+        let day = UIAlertAction(title: TimeWindow.day.rawValue, style: .default) { _ in
+            self.timeWindow = .day
+        }
+        let week = UIAlertAction(title: TimeWindow.week.rawValue, style: .default) { _ in
+            self.timeWindow = .week
+        }
+        alert.addAction(day)
+        alert.addAction(week)
+        present(alert, animated: true)
     }
     
     @objc func searchButtonTapped() {
@@ -62,19 +81,41 @@ class TrendViewController: UIViewController {
     func setTableView() {
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.rowHeight = UIScreen.main.bounds.width * 1.5
+        tableView.rowHeight = UIScreen.main.bounds.width * 1.4
         tableView.register(TrendTableViewCell.self, forCellReuseIdentifier: TrendTableViewCell.identifier)
+    }
+    
+    func callRequest() {
+        NetworkManager.shared.trendingRequest(timeWindow: timeWindow.rawValue) { result in
+            switch result {
+            case .success(let value):
+                self.successAction(value: value)
+            case .failure(let error):
+                self.failureAction(error: error)
+            }
+        }
+    }
+    
+    func successAction(value: MovieResponse) {
+        print("SUCCESS")
+        movieResponse = value
+        tableView.reloadData()
+    }
+    
+    func failureAction(error: AFError) {
+        print("ERROR")
     }
 }
 
 extension TrendViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return movieResponse?.movieList.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: TrendTableViewCell.identifier, for: indexPath) as! TrendTableViewCell
-        cell.backgroundColor = .orange
+        let data = movieResponse?.movieList[indexPath.row]
+        cell.configureCell(data: data)
         return cell
     }
     

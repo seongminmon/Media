@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 import SnapKit
 
 class TrendTableViewCell: UITableViewCell {
@@ -16,7 +17,6 @@ class TrendTableViewCell: UITableViewCell {
     let genreLabel = UILabel()
     
     let shadowView = UIView()
-    
     let containerView = UIView()
     let posterImageView = UIImageView()
     let shareButton = UIButton()
@@ -39,6 +39,12 @@ class TrendTableViewCell: UITableViewCell {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        shareButton.clipsToBounds = true
+        shareButton.layer.cornerRadius = shareButton.frame.width / 2
     }
     
     func addSubviews() {
@@ -118,13 +124,13 @@ class TrendTableViewCell: UITableViewCell {
         }
         
         summaryLabel.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(8)
+            make.top.equalTo(titleLabel.snp.bottom).offset(4)
             make.horizontalEdges.equalToSuperview().inset(8)
             make.bottom.equalTo(separator.snp.top).offset(-8)
         }
         
         separator.snp.makeConstraints { make in
-            make.bottom.equalTo(detailButton.snp.top).offset(-8)
+            make.bottom.equalTo(detailButton.snp.top).offset(-4)
             make.horizontalEdges.equalToSuperview().inset(8)
             make.height.equalTo(1)
         }
@@ -133,35 +139,69 @@ class TrendTableViewCell: UITableViewCell {
             make.top.equalTo(detailButton)
             make.leading.bottom.equalToSuperview().inset(8)
             make.trailing.equalTo(detailButton.snp.leading).offset(-8)
-            make.height.equalTo(30)
         }
         
         detailButton.snp.makeConstraints { make in
             make.trailing.bottom.equalToSuperview().inset(8)
-            make.size.equalTo(30)
+            make.size.equalTo(25)
         }
         
     }
     
     func setUI() {
-        dateLabel.backgroundColor = .brown
-        genreLabel.backgroundColor = .brown
-        shadowView.backgroundColor = .brown
-        containerView.backgroundColor = .yellow
-        posterImageView.backgroundColor = .gray
+        shadowView.layer.shadowColor = UIColor.black.cgColor
+        shadowView.layer.shadowOffset = .zero
+        shadowView.layer.shadowRadius = 10
+        shadowView.layer.shadowOpacity = 0.9
+        
+        containerView.clipsToBounds = true
+        containerView.layer.cornerRadius = 10
+        
+        dateLabel.font = .systemFont(ofSize: 13)
+        dateLabel.textColor = .gray
+        
+        genreLabel.font = .boldSystemFont(ofSize: 14)
+        
+        posterImageView.contentMode = .scaleAspectFill
+        
+        shareButton.setImage(UIImage(systemName: "paperclip"), for: .normal)
+        shareButton.tintColor = .black
         shareButton.backgroundColor = .white
-        gradeTitleLabel.backgroundColor = .green
-        gradeLabel.backgroundColor = .blue
         
-        descriptionView.backgroundColor = .red
-        titleLabel.backgroundColor = .black
-        summaryLabel.backgroundColor = .lightGray
-        separator.backgroundColor = .black
-        detailLabel.backgroundColor = .black
-        detailButton.backgroundColor = .black
+        gradeTitleLabel.text = "평점"
+        gradeTitleLabel.font = .systemFont(ofSize: 14)
+        gradeTitleLabel.textColor = .white
+        gradeTitleLabel.backgroundColor = .systemIndigo
+        gradeTitleLabel.textAlignment = .center
         
-        summaryLabel.text = "fajsdkdjsakfljsdkjkzcnvmxz,cnmjdaksflnzxmcv,jkdjkaldfjklweriqoweutiowerjkldfsadfsadfsadfsadfsdafsdafsadfvajkelrq;uiweotjksdlfjkaslfh"
+        gradeLabel.font = .systemFont(ofSize: 14)
+        gradeLabel.textColor = .systemIndigo
+        gradeLabel.backgroundColor = .white
+        gradeLabel.textAlignment = .center
+        
+        descriptionView.backgroundColor = .white
+        
+        titleLabel.font = .boldSystemFont(ofSize: 15)
+        
         summaryLabel.font = .systemFont(ofSize: 14)
         summaryLabel.numberOfLines = 2
+        
+        separator.backgroundColor = .black
+        
+        detailLabel.text = "자세히 보기"
+        detailLabel.font = .systemFont(ofSize: 14)
+        
+        detailButton.setImage(UIImage(systemName: "chevron.right"), for: .normal)
+        detailButton.tintColor = .black
+    }
+    
+    func configureCell(data: Movie?) {
+        guard let data else { return }
+        dateLabel.text = data.dateString
+        genreLabel.text = data.genreText
+        posterImageView.kf.setImage(with: data.posterImageURL)
+        gradeLabel.text = data.grade
+        titleLabel.text = data.title
+        summaryLabel.text = data.overview
     }
 }
