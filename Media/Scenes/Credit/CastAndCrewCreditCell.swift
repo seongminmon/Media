@@ -12,13 +12,25 @@ class CastAndCrewCreditCell: UITableViewCell {
     let profileImageView = UIImageView()
     let nameLabel = UILabel()
     let detailLabel = UILabel()
-    
+
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        addSubviews()
+        setLayout()
+        setUI()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    func addSubviews() {
         contentView.addSubview(profileImageView)
         contentView.addSubview(nameLabel)
         contentView.addSubview(detailLabel)
-        
+    }
+    
+    func setLayout() {
         profileImageView.snp.makeConstraints { make in
             make.verticalEdges.equalToSuperview().inset(8)
             make.leading.equalToSuperview().inset(16)
@@ -36,7 +48,9 @@ class CastAndCrewCreditCell: UITableViewCell {
             make.leading.equalTo(profileImageView.snp.trailing).offset(16)
             make.trailing.bottom.equalToSuperview().inset(16)
         }
-        
+    }
+    
+    func setUI() {
         profileImageView.contentMode = .scaleAspectFill
         profileImageView.backgroundColor = .gray
         profileImageView.clipsToBounds = true
@@ -46,10 +60,6 @@ class CastAndCrewCreditCell: UITableViewCell {
         
         detailLabel.font = .systemFont(ofSize: 13)
         detailLabel.textColor = .lightGray
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
     
     func configureCellWithCast(_ data: Cast?) {

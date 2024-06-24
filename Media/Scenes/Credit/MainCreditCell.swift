@@ -15,11 +15,22 @@ class MainCreditCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
+        addSubviews()
+        setLayout()
+        setUI()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    func addSubviews() {
         contentView.addSubview(backgroundImageView)
         contentView.addSubview(titleLabel)
         contentView.addSubview(posterImageView)
-        
+    }
+    
+    func setLayout() {
         backgroundImageView.snp.makeConstraints { make in
             make.top.equalToSuperview().inset(16)
             make.horizontalEdges.bottom.equalToSuperview()
@@ -37,7 +48,9 @@ class MainCreditCell: UITableViewCell {
             make.width.equalTo(80)
             make.height.equalTo(100)
         }
-        
+    }
+    
+    func setUI() {
         backgroundImageView.contentMode = .scaleAspectFill
         backgroundImageView.backgroundColor = .gray
         
@@ -46,10 +59,6 @@ class MainCreditCell: UITableViewCell {
         
         titleLabel.font = .boldSystemFont(ofSize: 24)
         titleLabel.textColor = .white
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
     
     func configureCell(_ data: Movie?) {
