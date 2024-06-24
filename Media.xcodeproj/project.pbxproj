@@ -28,6 +28,7 @@
 		24356AD52C2968DA000D2DF1 /* CastAndCrewCreditCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24356AD42C2968DA000D2DF1 /* CastAndCrewCreditCell.swift */; };
 		24356AD92C296D1E000D2DF1 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24356AD82C296D1E000D2DF1 /* SearchViewController.swift */; };
 		24356ADC2C296E19000D2DF1 /* SearchCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24356ADB2C296E19000D2DF1 /* SearchCollectionViewCell.swift */; };
+		24356ADE2C2974CD000D2DF1 /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24356ADD2C2974CD000D2DF1 /* UIViewController+.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,6 +52,7 @@
 		24356AD42C2968DA000D2DF1 /* CastAndCrewCreditCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CastAndCrewCreditCell.swift; sourceTree = "<group>"; };
 		24356AD82C296D1E000D2DF1 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		24356ADB2C296E19000D2DF1 /* SearchCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCollectionViewCell.swift; sourceTree = "<group>"; };
+		24356ADD2C2974CD000D2DF1 /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +94,7 @@
 				24356AB72C29391A000D2DF1 /* APIKey.swift */,
 				24356AC42C294DCF000D2DF1 /* NetworkManager.swift */,
 				24356ACC2C296836000D2DF1 /* ReuseIdentifierProtocol.swift */,
+				24356ADD2C2974CD000D2DF1 /* UIViewController+.swift */,
 				24356ACF2C29688E000D2DF1 /* Models */,
 				24356ACE2C29687F000D2DF1 /* Scenes */,
 				24356AA82C2938C4000D2DF1 /* Assets.xcassets */,
@@ -240,6 +243,7 @@
 				24356AC32C2941F6000D2DF1 /* TrendTableViewCell.swift in Sources */,
 				24356AD92C296D1E000D2DF1 /* SearchViewController.swift in Sources */,
 				24356AA02C2938C3000D2DF1 /* AppDelegate.swift in Sources */,
+				24356ADE2C2974CD000D2DF1 /* UIViewController+.swift in Sources */,
 				24356AD12C2968B1000D2DF1 /* OverviewCreditCell.swift in Sources */,
 				24356AB82C29391A000D2DF1 /* APIKey.swift in Sources */,
 				24356AA22C2938C3000D2DF1 /* SceneDelegate.swift in Sources */,

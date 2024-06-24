@@ -47,20 +47,14 @@ class TrendViewController: UIViewController {
     }
     
     @objc func menuButtonTapped() {
-        let alert = UIAlertController(
-            title: nil,
-            message: nil,
-            preferredStyle: .actionSheet
-        )
-        let day = UIAlertAction(title: TimeWindow.day.rawValue, style: .default) { _ in
+        showActionSheet(
+            title1: TimeWindow.day.rawValue,
+            title2: TimeWindow.week.rawValue
+        ) { _ in
             self.timeWindow = .day
-        }
-        let week = UIAlertAction(title: TimeWindow.week.rawValue, style: .default) { _ in
+        } secondAction: { _ in
             self.timeWindow = .week
         }
-        alert.addAction(day)
-        alert.addAction(week)
-        present(alert, animated: true)
     }
     
     @objc func searchButtonTapped() {
