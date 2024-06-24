@@ -14,6 +14,17 @@ class TrendViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        NetworkManager.shared.trendingRequest(timeWindow: "day") { result in
+            switch result {
+            case .success(let value):
+                dump(value)
+                
+            case .failure(let error):
+                dump(error)
+            }
+        }
+        
         setNavi()
         addSubviews()
         setLayout()

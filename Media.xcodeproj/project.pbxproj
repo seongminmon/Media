@@ -18,6 +18,8 @@
 		24356ABE2C293B3D000D2DF1 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 24356ABD2C293B3D000D2DF1 /* Alamofire */; };
 		24356AC12C293B53000D2DF1 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 24356AC02C293B53000D2DF1 /* Kingfisher */; };
 		24356AC32C2941F6000D2DF1 /* TrendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24356AC22C2941F5000D2DF1 /* TrendTableViewCell.swift */; };
+		24356AC52C294DCF000D2DF1 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24356AC42C294DCF000D2DF1 /* NetworkManager.swift */; };
+		24356AC72C294E58000D2DF1 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24356AC62C294E58000D2DF1 /* Movie.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +33,8 @@
 		24356AB32C2938D5000D2DF1 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		24356AB72C29391A000D2DF1 /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
 		24356AC22C2941F5000D2DF1 /* TrendTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendTableViewCell.swift; sourceTree = "<group>"; };
+		24356AC42C294DCF000D2DF1 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		24356AC62C294E58000D2DF1 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +74,8 @@
 				24356A9F2C2938C3000D2DF1 /* AppDelegate.swift */,
 				24356AA12C2938C3000D2DF1 /* SceneDelegate.swift */,
 				24356AB72C29391A000D2DF1 /* APIKey.swift */,
+				24356AC62C294E58000D2DF1 /* Movie.swift */,
+				24356AC42C294DCF000D2DF1 /* NetworkManager.swift */,
 				24356AA32C2938C3000D2DF1 /* TrendViewController.swift */,
 				24356AC22C2941F5000D2DF1 /* TrendTableViewCell.swift */,
 				24356AA82C2938C4000D2DF1 /* Assets.xcassets */,
@@ -160,6 +166,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				24356AC72C294E58000D2DF1 /* Movie.swift in Sources */,
+				24356AC52C294DCF000D2DF1 /* NetworkManager.swift in Sources */,
 				24356AA42C2938C3000D2DF1 /* TrendViewController.swift in Sources */,
 				24356AC32C2941F6000D2DF1 /* TrendTableViewCell.swift in Sources */,
 				24356AA02C2938C3000D2DF1 /* AppDelegate.swift in Sources */,
