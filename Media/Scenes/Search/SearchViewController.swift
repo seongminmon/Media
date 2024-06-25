@@ -89,7 +89,7 @@ class SearchViewController: UIViewController {
         collectionView.dataSource = self
         collectionView.prefetchDataSource = self
         
-        collectionView.register(SearchCollectionViewCell.self, forCellWithReuseIdentifier: SearchCollectionViewCell.identifier)
+        collectionView.register(PosterImageCollectionViewCell.self, forCellWithReuseIdentifier: PosterImageCollectionViewCell.identifier)
     }
     
     func callRequest(query: String, page: Int) {
@@ -104,7 +104,7 @@ class SearchViewController: UIViewController {
     }
     
     func successAction(value: MovieResponse) {
-        print("SUCCESS")
+        print("Search SUCCESS")
         if page == 1 {
             // 첫 검색일때 -> 교체
             movieResponse = value
@@ -122,7 +122,7 @@ class SearchViewController: UIViewController {
     }
     
     func failureAction(error: AFError) {
-        print("ERROR")
+        print("Search ERROR")
     }
 }
 
@@ -140,7 +140,7 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchCollectionViewCell.identifier, for: indexPath) as! SearchCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PosterImageCollectionViewCell.identifier, for: indexPath) as! PosterImageCollectionViewCell
         let data = movieResponse?.movieList[indexPath.item]
         cell.configureCell(data)
         return cell

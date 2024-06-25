@@ -31,11 +31,7 @@ class NetworkManager {
     }
     
     func creditRequest(movieId: Int, completionHandler: @escaping (Result<Credit, AFError>) -> Void) {
-        APIURL.creditMovieId = movieId
-        let url = APIURL.creditURL
-//        let parameters: Parameters = [
-//            "language" : "en-US"
-//        ]
+        let url = APIURL.movieURL + "\(movieId)" + "/credits"
         let headers: HTTPHeaders = [
             "accept": "application/json",
             "Authorization": APIKey.accessTokenAuth
@@ -65,9 +61,7 @@ class NetworkManager {
     }
     
     func similarRequest(movieId: Int, page: Int, completionHandler: @escaping (Result<MovieResponse, AFError>) -> Void) {
-        print(#function)
-        APIURL.similarMovieId = movieId
-        let url = APIURL.similarURL
+        let url = APIURL.movieURL + "\(movieId)" + "/similar"
         let parameters: Parameters = [
             "language" : "en-US",
             "page" : page
@@ -84,9 +78,24 @@ class NetworkManager {
     }
     
     func recommendRequest(movieId: Int, page: Int, completionHandler: @escaping (Result<MovieResponse, AFError>) -> Void) {
-        print(#function)
-        APIURL.similarMovieId = movieId
-        let url = APIURL.recommendURL
+        let url = APIURL.movieURL + "\(movieId)" + "/recommendations"
+        let parameters: Parameters = [
+            "language" : "en-US",
+            "page" : page
+        ]
+        let headers: HTTPHeaders = [
+            "accept": "application/json",
+            "Authorization": APIKey.accessTokenAuth
+        ]
+        
+        AF.request(url, method: .get, parameters: parameters, headers: headers)
+            .responseDecodable(of: MovieResponse.self) { response in
+            completionHandler(response.result)
+        }
+    }
+    
+    func posterRequest(movieId: Int, page: Int, completionHandler: @escaping (Result<MovieResponse, AFError>) -> Void) {
+        let url = APIURL.movieURL + "\(movieId)" + "/images"
         let parameters: Parameters = [
             "language" : "en-US",
             "page" : page

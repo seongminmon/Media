@@ -26,6 +26,6 @@ struct Cast: Decodable {
     }
     
     var posterImageURL: URL? {
-        return URL(string: "https://image.tmdb.org/t/p/w500/\(profilePath ?? "")")
+        return URL(string: APIURL.imageURL + (profilePath ?? ""))
     }
 }

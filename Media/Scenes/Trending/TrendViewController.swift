@@ -21,6 +21,7 @@ class TrendViewController: UIViewController {
     var timeWindow: TimeWindow = .day {
         didSet {
             navigationItem.title = timeWindow.rawValue
+            tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
             callRequest()
         }
     }
@@ -91,13 +92,13 @@ class TrendViewController: UIViewController {
     }
     
     func successAction(value: MovieResponse) {
-        print("SUCCESS")
+        print("Trending SUCCESS")
         movieResponse = value
         tableView.reloadData()
     }
     
     func failureAction(error: AFError) {
-        print("ERROR")
+        print("Trending ERROR")
     }
 }
 

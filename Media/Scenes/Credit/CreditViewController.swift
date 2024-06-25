@@ -87,13 +87,13 @@ class CreditViewController: UIViewController {
     }
     
     func successAction(value: Credit) {
-        print("SUCCESS")
+        print("Credit SUCCESS")
         credit = value
         tableView.reloadData()
     }
     
     func failureAction(error: AFError) {
-        print("ERROR")
+        print("Credit ERROR")
     }
 }
 

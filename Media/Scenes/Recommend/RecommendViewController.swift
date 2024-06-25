@@ -11,32 +11,35 @@ import SnapKit
 
 class RecommendViewController: UIViewController {
     
-    let similarLabel = UILabel()
-    lazy var similarCollectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout())
-    
-    let recommendLabel = UILabel()
-    lazy var recommendCollectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout())
+    lazy var tableView: UITableView = {
+        let tableView = UITableView()
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.rowHeight = 220
+        tableView.register(RecommendTableViewCell.self, forCellReuseIdentifier: RecommendTableViewCell.identifier)
+        return tableView
+    }()
     
     // 이전 화면에서 전달
     var navTitle: String?
     var movieid: Int?
     
+    var titleList: [String] = ["비슷한 영화", "추천 영화", "포스터"]
     // 네트워크로 전달
-    var similarMovieResponse: MovieResponse?
-    var similarPage = 1 // 페이지네이션 위한 변수
-    var recommendMovieResponse: MovieResponse?
-    var recommendPage = 1 // 페이지네이션 위한 변수
+    var movieResponseList: [MovieResponse?] = [
+        MovieResponse(page: 0, movieList: [], totalPages: 0, totalResults: 0),
+        MovieResponse(page: 0, movieList: [], totalPages: 0, totalResults: 0),
+        MovieResponse(page: 0, movieList: [], totalPages: 0, totalResults: 0),
+    ]
+    var pageList: [Int] = [1, 1, 1]
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        similarCallRequest(movieid: movieid ?? 0, page: similarPage)
-        recommendCallRequest(movieid: movieid ?? 0, page: recommendPage)
-        
+        fetchData()
         setNavi()
         addSubviews()
         setLayout()
-        setCollectionView()
-        setUI()
+        configureView()
     }
     
     func setNavi() {
@@ -44,192 +47,106 @@ class RecommendViewController: UIViewController {
     }
     
     func addSubviews() {
-        view.addSubview(similarLabel)
-        view.addSubview(similarCollectionView)
-        view.addSubview(recommendLabel)
-        view.addSubview(recommendCollectionView)
+        view.addSubview(tableView)
     }
     
     func setLayout() {
-        similarLabel.snp.makeConstraints { make in
-            make.top.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(16)
-            make.height.equalTo(20)
-        }
-        
-        similarCollectionView.snp.makeConstraints { make in
-            make.top.equalTo(similarLabel.snp.bottom)
-            make.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
-            make.height.equalTo(220)
-        }
-        
-        recommendLabel.snp.makeConstraints { make in
-            make.top.equalTo(similarCollectionView.snp.bottom).offset(16)
-            make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(16)
-            make.height.equalTo(20)
-        }
-        
-        recommendCollectionView.snp.makeConstraints { make in
-            make.top.equalTo(recommendLabel.snp.bottom)
-            make.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
-            make.height.equalTo(220)
+        tableView.snp.makeConstraints { make in
+            make.edges.equalTo(view.safeAreaLayoutGuide)
         }
     }
     
-    func collectionViewLayout() -> UICollectionViewLayout {
-        let layout = UICollectionViewFlowLayout()
-        
-        let sectionSpacing: CGFloat = 10
-        let cellSpacing: CGFloat = 10
-        
-        layout.itemSize = CGSize(width: 150, height: 200)
-        layout.scrollDirection = .horizontal
-        layout.minimumInteritemSpacing = cellSpacing
-        layout.minimumLineSpacing = cellSpacing
-        layout.sectionInset = UIEdgeInsets(top: sectionSpacing, left: sectionSpacing, bottom: sectionSpacing, right: sectionSpacing)
-        
-        return layout
+    func configureView() {
+        view.backgroundColor = .white
     }
     
-    func setUI() {
-        view.backgroundColor = .black
-        similarLabel.text = "비슷한 영화"
-        similarLabel.font = .boldSystemFont(ofSize: 16)
-        similarLabel.textColor = .white
+    func fetchData() {
+        let group = DispatchGroup()
         
-        recommendLabel.text = "추천 영화"
-        recommendLabel.font = .boldSystemFont(ofSize: 16)
-        recommendLabel.textColor = .white
-    }
-    
-    func setCollectionView() {
-        similarCollectionView.delegate = self
-        similarCollectionView.dataSource = self
-        similarCollectionView.prefetchDataSource = self
-        similarCollectionView.register(SearchCollectionViewCell.self, forCellWithReuseIdentifier: SearchCollectionViewCell.identifier)
-        similarCollectionView.backgroundColor = .clear
-        similarCollectionView.showsHorizontalScrollIndicator = false
-        
-        recommendCollectionView.delegate = self
-        recommendCollectionView.dataSource = self
-        recommendCollectionView.prefetchDataSource = self
-        recommendCollectionView.register(SearchCollectionViewCell.self, forCellWithReuseIdentifier: SearchCollectionViewCell.identifier)
-        recommendCollectionView.backgroundColor = .clear
-        recommendCollectionView.showsHorizontalScrollIndicator = false
-    }
-    
-    func similarCallRequest(movieid: Int, page: Int) {
-        NetworkManager.shared.similarRequest(movieId: movieid, page: page) { result in
-            switch result {
-            case .success(let value):
-                self.similarSuccessAction(value: value)
-            case .failure(let error):
-                self.similarFailureAction(error: error)
+        // 비슷한 영화 네트워크 통신
+        group.enter()
+        DispatchQueue.global().async(group: group) {
+            NetworkManager.shared.similarRequest(movieId: self.movieid ?? 0, page: self.pageList[0]) { result in
+                switch result {
+                case .success(let value):
+                    self.movieResponseList[0] = value
+                    
+                case .failure(let error):
+                    dump(error)
+                }
+                group.leave()
             }
         }
-    }
-    
-    func similarSuccessAction(value: MovieResponse) {
-        print("SUCCESS")
-        if similarPage == 1 {
-            // 첫 검색일때 -> 교체
-            similarMovieResponse = value
-        } else {
-            // 페이지네이션일때 -> 추가
-            similarMovieResponse?.movieList.append(contentsOf: value.movieList)
-        }
         
-        similarCollectionView.reloadData()
-        
-        // 스크롤 맨위로 올리기
-        if let movieList = similarMovieResponse?.movieList, !movieList.isEmpty, similarPage == 1 {
-            similarCollectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: false)
-        }
-    }
-    
-    func similarFailureAction(error: AFError) {
-        dump(error)
-    }
-    
-    func recommendCallRequest(movieid: Int, page: Int) {
-        NetworkManager.shared.recommendRequest(movieId: movieid, page: page) { result in
-            switch result {
-            case .success(let value):
-                self.recommendSuccessAction(value: value)
-            case .failure(let error):
-                self.recommendFailureAction(error: error)
+        // 추천 영화 네트워크 통신
+        group.enter()
+        DispatchQueue.global().async(group: group) {
+            NetworkManager.shared.recommendRequest(movieId: self.movieid ?? 0, page: self.pageList[1]) { result in
+                switch result {
+                case .success(let value):
+                    self.movieResponseList[1] = value
+                    
+                case .failure(let error):
+                    dump(error)
+                }
+                group.leave()
             }
         }
-    }
-    
-    func recommendSuccessAction(value: MovieResponse) {
-        print("SUCCESS")
-        if recommendPage == 1 {
-            // 첫 검색일때 -> 교체
-            recommendMovieResponse = value
-        } else {
-            // 페이지네이션일때 -> 추가
-            recommendMovieResponse?.movieList.append(contentsOf: value.movieList)
+        
+        // 포스터 네트워크 통신
+        group.enter()
+        DispatchQueue.global().async(group: group) {
+            NetworkManager.shared.recommendRequest(movieId: self.movieid ?? 0, page: self.pageList[2]) { result in
+                switch result {
+                case .success(let value):
+                    self.movieResponseList[2] = value
+                    
+                case .failure(let error):
+                    dump(error)
+                }
+                group.leave()
+            }
         }
         
-        recommendCollectionView.reloadData()
-        
-        // 스크롤 맨위로 올리기
-        if let movieList = recommendMovieResponse?.movieList, !movieList.isEmpty, recommendPage == 1 {
-            recommendCollectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: false)
+        group.notify(queue: .main) {
+            self.tableView.reloadData()
         }
     }
+}
+
+extension RecommendViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return movieResponseList.count
+    }
     
-    func recommendFailureAction(error: AFError) {
-        dump(error)
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: RecommendTableViewCell.identifier, for: indexPath) as! RecommendTableViewCell
+        let title = titleList[indexPath.row]
+        cell.configureCell(title: title)
+        
+        cell.collectionView.delegate = self
+        cell.collectionView.dataSource = self
+        cell.collectionView.register(PosterImageCollectionViewCell.self, forCellWithReuseIdentifier: PosterImageCollectionViewCell.identifier)
+        cell.collectionView.backgroundColor = .clear
+        cell.collectionView.showsHorizontalScrollIndicator = false
+        
+        // collectionView 태그 설정
+        cell.collectionView.tag = indexPath.row
+        cell.collectionView.reloadData()
+        
+        return cell
     }
 }
 
 extension RecommendViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if collectionView == similarCollectionView {
-            return similarMovieResponse?.movieList.count ?? 0
-        } else {
-            return recommendMovieResponse?.movieList.count ?? 0
-        }
+        return movieResponseList[collectionView.tag]?.movieList.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if collectionView == similarCollectionView {
-            let cell = similarCollectionView.dequeueReusableCell(withReuseIdentifier: SearchCollectionViewCell.identifier, for: indexPath) as! SearchCollectionViewCell
-            let data = similarMovieResponse?.movieList[indexPath.item]
-            cell.configureCell(data)
-            return cell
-        } else {
-            let cell = recommendCollectionView.dequeueReusableCell(withReuseIdentifier: SearchCollectionViewCell.identifier, for: indexPath) as! SearchCollectionViewCell
-            let data = recommendMovieResponse?.movieList[indexPath.item]
-            cell.configureCell(data)
-            return cell
-        }
-    }
-}
-
-extension RecommendViewController: UICollectionViewDataSourcePrefetching {
-    // 페이지네이션
-    func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
-        print(indexPaths)
-        if collectionView == similarCollectionView {
-            guard let similarMovieResponse else { return }
-            for indexPath in indexPaths {
-                if indexPath.item == similarMovieResponse.movieList.count - 2,
-                   similarPage < similarMovieResponse.totalPages {
-                    similarPage += 1
-                    similarCallRequest(movieid: movieid ?? 0, page: similarPage)
-                }
-            }
-        } else {
-            guard let recommendMovieResponse else { return }
-            for indexPath in indexPaths {
-                if indexPath.item == recommendMovieResponse.movieList.count - 2,
-                   recommendPage < recommendMovieResponse.totalPages {
-                    recommendPage += 1
-                    recommendCallRequest(movieid: movieid ?? 0, page: recommendPage)
-                }
-            }
-        }
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PosterImageCollectionViewCell.identifier, for: indexPath) as! PosterImageCollectionViewCell
+        let data = movieResponseList[collectionView.tag]?.movieList[indexPath.row]
+        cell.configureCell(data)
+        return cell
     }
 }
