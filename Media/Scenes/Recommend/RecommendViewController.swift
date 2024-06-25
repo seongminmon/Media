@@ -57,6 +57,7 @@ class RecommendViewController: UIViewController {
     }
     
     func fetchData() {
+        // DispatchGroup으로 tableview reload 3개의 통신 완료 후 한번만 하기
         let group = DispatchGroup()
         
         // 비슷한 영화 네트워크 통신
@@ -114,6 +115,7 @@ class RecommendViewController: UIViewController {
             self.tableView.reloadData()
         }
     }
+    
 }
 
 extension RecommendViewController: UITableViewDelegate, UITableViewDataSource {
@@ -134,6 +136,7 @@ extension RecommendViewController: UITableViewDelegate, UITableViewDataSource {
         
         // collectionView 태그 설정
         cell.collectionView.tag = indexPath.row
+        // 테이블뷰가 리로드될 때 컬렉션뷰도 함께 리로드 시키기
         cell.collectionView.reloadData()
         
         return cell

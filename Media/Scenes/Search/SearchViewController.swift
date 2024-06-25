@@ -147,6 +147,7 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        // 추천 화면으로 이동
         let data = movieResponse?.movieList[indexPath.item]
         let vc = RecommendViewController()
         vc.navTitle = data?.title
