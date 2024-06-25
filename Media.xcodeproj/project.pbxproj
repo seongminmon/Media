@@ -31,6 +31,7 @@
 		24356ADE2C2974CD000D2DF1 /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24356ADD2C2974CD000D2DF1 /* UIViewController+.swift */; };
 		24356AE02C2986B4000D2DF1 /* RecommendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24356ADF2C2986B4000D2DF1 /* RecommendViewController.swift */; };
 		24356B042C2AA6AA000D2DF1 /* RecommendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24356B032C2AA6AA000D2DF1 /* RecommendTableViewCell.swift */; };
+		24356B072C2AB9F2000D2DF1 /* ImageResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24356B062C2AB9F2000D2DF1 /* ImageResponse.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,6 +58,7 @@
 		24356ADD2C2974CD000D2DF1 /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
 		24356ADF2C2986B4000D2DF1 /* RecommendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendViewController.swift; sourceTree = "<group>"; };
 		24356B032C2AA6AA000D2DF1 /* RecommendTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendTableViewCell.swift; sourceTree = "<group>"; };
+		24356B062C2AB9F2000D2DF1 /* ImageResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageResponse.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,8 +99,8 @@
 				24356AA12C2938C3000D2DF1 /* SceneDelegate.swift */,
 				24356AB72C29391A000D2DF1 /* APIKey.swift */,
 				24356AC42C294DCF000D2DF1 /* NetworkManager.swift */,
-				24356B052C2AB5DA000D2DF1 /* Extension */,
 				24356ACF2C29688E000D2DF1 /* Models */,
+				24356B052C2AB5DA000D2DF1 /* Extension */,
 				24356ACE2C29687F000D2DF1 /* Scenes */,
 				24356AA82C2938C4000D2DF1 /* Assets.xcassets */,
 				24356AAA2C2938C4000D2DF1 /* LaunchScreen.storyboard */,
@@ -123,6 +125,7 @@
 			children = (
 				24356AC62C294E58000D2DF1 /* Movie.swift */,
 				24356ACA2C2966A2000D2DF1 /* Credit.swift */,
+				24356B062C2AB9F2000D2DF1 /* ImageResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -261,6 +264,7 @@
 				24356AC92C296686000D2DF1 /* CreditViewController.swift in Sources */,
 				24356AC52C294DCF000D2DF1 /* NetworkManager.swift in Sources */,
 				24356AA42C2938C3000D2DF1 /* TrendViewController.swift in Sources */,
+				24356B072C2AB9F2000D2DF1 /* ImageResponse.swift in Sources */,
 				24356ACD2C296836000D2DF1 /* ReuseIdentifierProtocol.swift in Sources */,
 				24356AC32C2941F6000D2DF1 /* TrendTableViewCell.swift in Sources */,
 				24356B042C2AA6AA000D2DF1 /* RecommendTableViewCell.swift in Sources */,

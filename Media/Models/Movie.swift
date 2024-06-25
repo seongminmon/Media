@@ -29,32 +29,33 @@ struct Movie: Decodable {
     let title: String
     let overview: String
     let voteAverage: Double
+    let backdropPath: String?
     
     //
-    let originalLanguage: String
-    let originalTitle: String
-    let mediaType: String?
-    let adult: Bool
-    let backdropPath: String?
-    let popularity: Double
-    let video: Bool
-    let voteCount: Int
+//    let originalLanguage: String
+//    let originalTitle: String
+//    let mediaType: String?
+//    let adult: Bool
+//    let popularity: Double
+//    let video: Bool
+//    let voteCount: Int
 
     enum CodingKeys: String, CodingKey {
-        case backdropPath = "backdrop_path"
         case id
-        case originalTitle = "original_title"
-        case overview
         case posterPath = "poster_path"
-        case mediaType = "media_type"
-        case adult, title
-        case originalLanguage = "original_language"
-        case genreIdList = "genre_ids"
-        case popularity
         case releaseDate = "release_date"
-        case video
+        case genreIdList = "genre_ids"
+        case title
+        case overview
         case voteAverage = "vote_average"
-        case voteCount = "vote_count"
+        case backdropPath = "backdrop_path"
+//        case originalTitle = "original_title"
+//        case mediaType = "media_type"
+//        case adult
+//        case originalLanguage = "original_language"
+//        case popularity
+//        case video
+//        case voteCount = "vote_count"
     }
     
     static let genreDict: [Int: String] = [

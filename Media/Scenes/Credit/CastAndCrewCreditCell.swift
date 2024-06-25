@@ -64,14 +64,14 @@ class CastAndCrewCreditCell: UITableViewCell {
     
     func configureCellWithCast(_ data: Cast?) {
         guard let data else { return }
-        profileImageView.kf.setImage(with: data.posterImageURL)
+        profileImageView.kf.setImage(with: data.profileImageURL)
         nameLabel.text = data.name
         detailLabel.text = data.character
     }
     
     func configureCellWithCrew(_ data: Cast?) {
         guard let data else { return }
-        profileImageView.kf.setImage(with: data.posterImageURL)
+        profileImageView.kf.setImage(with: data.profileImageURL)
         nameLabel.text = data.name
         detailLabel.text = data.knownForDepartment
     }

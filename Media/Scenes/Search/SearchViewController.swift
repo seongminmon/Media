@@ -141,7 +141,7 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PosterImageCollectionViewCell.identifier, for: indexPath) as! PosterImageCollectionViewCell
-        let data = movieResponse?.movieList[indexPath.item]
+        let data = movieResponse?.movieList[indexPath.item].posterImageURL
         cell.configureCell(data)
         return cell
     }

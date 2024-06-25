@@ -94,19 +94,15 @@ class NetworkManager {
         }
     }
     
-    func posterRequest(movieId: Int, page: Int, completionHandler: @escaping (Result<MovieResponse, AFError>) -> Void) {
+    func posterRequest(movieId: Int, page: Int, completionHandler: @escaping (Result<ImageResponse, AFError>) -> Void) {
         let url = APIURL.movieURL + "\(movieId)" + "/images"
-        let parameters: Parameters = [
-            "language" : "en-US",
-            "page" : page
-        ]
         let headers: HTTPHeaders = [
             "accept": "application/json",
             "Authorization": APIKey.accessTokenAuth
         ]
         
-        AF.request(url, method: .get, parameters: parameters, headers: headers)
-            .responseDecodable(of: MovieResponse.self) { response in
+        AF.request(url, method: .get, headers: headers)
+            .responseDecodable(of: ImageResponse.self) { response in
             completionHandler(response.result)
         }
     }

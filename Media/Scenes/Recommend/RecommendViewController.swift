@@ -26,11 +26,7 @@ class RecommendViewController: UIViewController {
     
     var titleList: [String] = ["비슷한 영화", "추천 영화", "포스터"]
     // 네트워크로 전달
-    var movieResponseList: [MovieResponse?] = [
-        MovieResponse(page: 0, movieList: [], totalPages: 0, totalResults: 0),
-        MovieResponse(page: 0, movieList: [], totalPages: 0, totalResults: 0),
-        MovieResponse(page: 0, movieList: [], totalPages: 0, totalResults: 0),
-    ]
+    var urlList: [[URL?]] = [[], [], []]
     var pageList: [Int] = [1, 1, 1]
     
     override func viewDidLoad() {
@@ -69,10 +65,12 @@ class RecommendViewController: UIViewController {
             NetworkManager.shared.similarRequest(movieId: self.movieid ?? 0, page: self.pageList[0]) { result in
                 switch result {
                 case .success(let value):
-                    self.movieResponseList[0] = value
+                    print("similar SUCCESS")
+                    self.urlList[0] = value.movieList.map { $0.posterImageURL }
                     
                 case .failure(let error):
-                    dump(error)
+                    print("similar ERROR")
+                    print(error)
                 }
                 group.leave()
             }
@@ -84,10 +82,12 @@ class RecommendViewController: UIViewController {
             NetworkManager.shared.recommendRequest(movieId: self.movieid ?? 0, page: self.pageList[1]) { result in
                 switch result {
                 case .success(let value):
-                    self.movieResponseList[1] = value
+                    print("recommend SUCCESS")
+                    self.urlList[1] = value.movieList.map { $0.posterImageURL }
                     
                 case .failure(let error):
-                    dump(error)
+                    print("recommend ERROR")
+                    print(error)
                 }
                 group.leave()
             }
@@ -96,13 +96,15 @@ class RecommendViewController: UIViewController {
         // 포스터 네트워크 통신
         group.enter()
         DispatchQueue.global().async(group: group) {
-            NetworkManager.shared.recommendRequest(movieId: self.movieid ?? 0, page: self.pageList[2]) { result in
+            NetworkManager.shared.posterRequest(movieId: self.movieid ?? 0, page: self.pageList[2]) { result in
                 switch result {
                 case .success(let value):
-                    self.movieResponseList[2] = value
+                    print("poster SUCCESS")
+                    self.urlList[2] = value.posters.map { $0.posterImageURL }
                     
                 case .failure(let error):
-                    dump(error)
+                    print("poster ERROR")
+                    print(error)
                 }
                 group.leave()
             }
@@ -116,7 +118,7 @@ class RecommendViewController: UIViewController {
 
 extension RecommendViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return movieResponseList.count
+        return urlList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -140,12 +142,12 @@ extension RecommendViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension RecommendViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return movieResponseList[collectionView.tag]?.movieList.count ?? 0
+        return urlList[collectionView.tag].count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PosterImageCollectionViewCell.identifier, for: indexPath) as! PosterImageCollectionViewCell
-        let data = movieResponseList[collectionView.tag]?.movieList[indexPath.row]
+        let data = urlList[collectionView.tag][indexPath.row]
         cell.configureCell(data)
         return cell
     }

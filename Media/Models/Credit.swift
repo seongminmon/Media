@@ -9,7 +9,8 @@ import Foundation
 
 struct Credit: Decodable {
     let id: Int
-    let cast, crew: [Cast]
+    let cast: [Cast]
+    let crew: [Cast]
 }
 
 struct Cast: Decodable {
@@ -25,7 +26,7 @@ struct Cast: Decodable {
         case knownForDepartment = "known_for_department"
     }
     
-    var posterImageURL: URL? {
+    var profileImageURL: URL? {
         return URL(string: APIURL.imageURL + (profilePath ?? ""))
     }
 }

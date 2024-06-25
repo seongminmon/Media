@@ -42,8 +42,8 @@ class PosterImageCollectionViewCell: UICollectionViewCell {
         posterImageView.layer.cornerRadius = 10
     }
     
-    func configureCell(_ data: Movie?) {
-        posterImageView.kf.setImage(with: data?.posterImageURL)
+    func configureCell(_ url: URL?) {
+        posterImageView.kf.setImage(with: url)
     }
 }
 
