@@ -7,30 +7,19 @@
 
 import UIKit
 
-class MainCreditCell: UITableViewCell {
+class MainCreditCell: BaseTableViewCell {
     
     let backgroundImageView = UIImageView()
     let posterImageView = UIImageView()
     let titleLabel = UILabel()
     
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        addSubviews()
-        setLayout()
-        setUI()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    func addSubviews() {
+    override func addSubviews() {
         contentView.addSubview(backgroundImageView)
         contentView.addSubview(titleLabel)
         contentView.addSubview(posterImageView)
     }
     
-    func setLayout() {
+    override func configureLayout() {
         backgroundImageView.snp.makeConstraints { make in
             make.top.equalToSuperview().inset(16)
             make.horizontalEdges.bottom.equalToSuperview()
@@ -50,7 +39,7 @@ class MainCreditCell: UITableViewCell {
         }
     }
     
-    func setUI() {
+    override func configureView() {
         backgroundImageView.contentMode = .scaleAspectFill
         backgroundImageView.backgroundColor = .gray
         

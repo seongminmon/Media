@@ -7,30 +7,19 @@
 
 import UIKit
 
-class CastAndCrewCreditCell: UITableViewCell {
+class CastAndCrewCreditCell: BaseTableViewCell {
     
     let profileImageView = UIImageView()
     let nameLabel = UILabel()
     let detailLabel = UILabel()
 
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        addSubviews()
-        setLayout()
-        setUI()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    func addSubviews() {
+    override func addSubviews() {
         contentView.addSubview(profileImageView)
         contentView.addSubview(nameLabel)
         contentView.addSubview(detailLabel)
     }
     
-    func setLayout() {
+    override func configureLayout() {
         profileImageView.snp.makeConstraints { make in
             make.verticalEdges.equalToSuperview().inset(8)
             make.leading.equalToSuperview().inset(16)
@@ -50,8 +39,7 @@ class CastAndCrewCreditCell: UITableViewCell {
         }
     }
     
-    func setUI() {
-        profileImageView.contentMode = .scaleAspectFill
+    override func configureView() {        profileImageView.contentMode = .scaleAspectFill
         profileImageView.backgroundColor = .gray
         profileImageView.clipsToBounds = true
         profileImageView.layer.cornerRadius = 10
@@ -59,8 +47,7 @@ class CastAndCrewCreditCell: UITableViewCell {
         nameLabel.font = .boldSystemFont(ofSize: 14)
         
         detailLabel.font = .systemFont(ofSize: 13)
-        detailLabel.textColor = .lightGray
-    }
+        detailLabel.textColor = .lightGray}
     
     func configureCellWithCast(_ data: Cast?) {
         guard let data else { return }

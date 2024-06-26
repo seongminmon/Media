@@ -7,28 +7,17 @@
 
 import UIKit
 
-class OverviewCreditCell: UITableViewCell {
+class OverviewCreditCell: BaseTableViewCell {
     
     let descriptionLabel = UILabel()
     let seeMoreButton = UIButton()
     
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        addSubviews()
-        setLayout()
-        setUI()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    func addSubviews() {
+    override func addSubviews() {
         contentView.addSubview(descriptionLabel)
         contentView.addSubview(seeMoreButton)
     }
     
-    func setLayout() {
+    override func configureLayout() {
         descriptionLabel.snp.makeConstraints { make in
             make.top.horizontalEdges.equalToSuperview().inset(16)
             make.height.equalTo(40)
@@ -41,7 +30,7 @@ class OverviewCreditCell: UITableViewCell {
         }
     }
     
-    func setUI() {
+    override func configureView() {
         descriptionLabel.font = .systemFont(ofSize: 13)
         descriptionLabel.numberOfLines = 0
         

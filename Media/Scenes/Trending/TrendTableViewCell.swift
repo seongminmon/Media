@@ -9,7 +9,7 @@ import UIKit
 import Kingfisher
 import SnapKit
 
-class TrendTableViewCell: UITableViewCell {
+class TrendTableViewCell: BaseTableViewCell {
     
     let dateLabel = UILabel()
     let genreLabel = UILabel()
@@ -28,24 +28,13 @@ class TrendTableViewCell: UITableViewCell {
     let detailLabel = UILabel()
     let detailButton = UIButton()
     
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        addSubviews()
-        setLayout()
-        setUI()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
     override func layoutSubviews() {
         super.layoutSubviews()
         shareButton.clipsToBounds = true
         shareButton.layer.cornerRadius = shareButton.frame.width / 2
     }
     
-    func addSubviews() {
+    override func addSubviews() {
         addSubview(dateLabel)
         addSubview(genreLabel)
         
@@ -64,8 +53,8 @@ class TrendTableViewCell: UITableViewCell {
         shadowView.addSubview(containerView)
         addSubview(shadowView)
     }
-    
-    func setLayout() {
+
+    override func configureLayout() {
         dateLabel.snp.makeConstraints { make in
             make.top.equalTo(contentView.safeAreaLayoutGuide).inset(8)
             make.horizontalEdges.equalTo(contentView.safeAreaLayoutGuide).inset(16)
@@ -143,10 +132,9 @@ class TrendTableViewCell: UITableViewCell {
             make.trailing.bottom.equalToSuperview().inset(8)
             make.size.equalTo(25)
         }
-        
     }
-    
-    func setUI() {
+
+    override func configureView() {
         shadowView.layer.shadowColor = UIColor.black.cgColor
         shadowView.layer.shadowOffset = .zero
         shadowView.layer.shadowRadius = 10

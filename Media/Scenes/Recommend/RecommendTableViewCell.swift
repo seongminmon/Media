@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class RecommendTableViewCell: UITableViewCell {
+class RecommendTableViewCell: BaseTableViewCell {
     
     let titleLabel = UILabel()
     let collectionView = UICollectionView(frame: .zero, collectionViewLayout: RecommendTableViewCell.collectionViewLayout())
@@ -28,12 +28,12 @@ class RecommendTableViewCell: UITableViewCell {
         return layout
     }
     
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
+    override func addSubviews() {
         contentView.addSubview(titleLabel)
         contentView.addSubview(collectionView)
-        
+    }
+    
+    override func configureLayout() {
         titleLabel.snp.makeConstraints { make in
             make.top.horizontalEdges.equalTo(contentView.safeAreaLayoutGuide).inset(16)
             make.height.equalTo(20)
@@ -43,12 +43,10 @@ class RecommendTableViewCell: UITableViewCell {
             make.top.equalTo(titleLabel.snp.bottom)
             make.horizontalEdges.bottom.equalTo(contentView.safeAreaLayoutGuide)
         }
-        
-        titleLabel.font = .boldSystemFont(ofSize: 17)
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    override func configureView() {
+        titleLabel.font = .boldSystemFont(ofSize: 17)
     }
     
     func configureCell(title: String) {
