@@ -27,7 +27,7 @@ class RecommendViewController: UIViewController {
     var titleList: [String] = ["비슷한 영화", "추천 영화", "포스터"]
     // 네트워크로 전달
     var urlList: [[URL?]] = [[], [], []]
-    var pageList: [Int] = [1, 1, 1]
+    var pageList: [Int] = [1, 1]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,7 +57,6 @@ class RecommendViewController: UIViewController {
     }
     
     func fetchData() {
-        // DispatchGroup으로 tableview reload 3개의 통신 완료 후 한번만 하기
         let group = DispatchGroup()
         
         // 비슷한 영화 네트워크 통신
@@ -97,7 +96,7 @@ class RecommendViewController: UIViewController {
         // 포스터 네트워크 통신
         group.enter()
         DispatchQueue.global().async(group: group) {
-            NetworkManager.shared.posterRequest(movieId: self.movieid ?? 0, page: self.pageList[2]) { result in
+            NetworkManager.shared.posterRequest(movieId: self.movieid ?? 0) { result in
                 switch result {
                 case .success(let value):
                     print("poster SUCCESS")
@@ -111,6 +110,7 @@ class RecommendViewController: UIViewController {
             }
         }
         
+        // 3개의 네트워크 통신 모두 종료한 시점에 한번만 tableview reload
         group.notify(queue: .main) {
             self.tableView.reloadData()
         }
