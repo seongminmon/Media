@@ -93,14 +93,15 @@ class SearchViewController: UIViewController {
     }
     
     func callRequest(query: String, page: Int) {
-//        NetworkManager.shared.searchRequest(query: query, page: page) { result in
-//            switch result {
-//            case .success(let value):
-//                self.successAction(value: value)
-//            case .failure(let error):
-//                self.failureAction(error: error)
-//            }
-//        }
+        NetworkManager.shared.search(api: .search(query: query, page: page)) { data, error in
+            if let error = error {
+                print("에러 얼럿 띄우기")
+            } else {
+                if let data = data {
+                    self.successAction(value: data)
+                }
+            }
+        }
     }
     
     func successAction(value: MovieResponse) {
@@ -119,10 +120,6 @@ class SearchViewController: UIViewController {
         if let movieList = movieResponse?.movieList, !movieList.isEmpty, page == 1 {
             collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: false)
         }
-    }
-    
-    func failureAction(error: AFError) {
-        print("Search ERROR")
     }
 }
 

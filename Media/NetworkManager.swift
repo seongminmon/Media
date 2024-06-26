@@ -116,35 +116,26 @@ class NetworkManager {
         }
     }
     
-//    func trendingRequest(timeWindow: String, completionHandler: @escaping (Result<MovieResponse, AFError>) -> Void) {
-//        let url = APIURL.trendingURL + timeWindow
-//        let parameters: Parameters = [
-//            "language" : "en-US"
-//        ]
-//        let headers: HTTPHeaders = [
-//            "accept": "application/json",
-//            "Authorization": APIKey.accessToken
-//        ]
-//        
-//        AF.request(url, method: .get, parameters: parameters, headers: headers)
-//            .responseDecodable(of: MovieResponse.self) { response in
-//            completionHandler(response.result)
-//        }
-//    }
-//    
-//    func creditRequest(movieId: Int, completionHandler: @escaping (Result<Credit, AFError>) -> Void) {
-//        let url = APIURL.movieURL + "\(movieId)" + "/credits"
-//        let headers: HTTPHeaders = [
-//            "accept": "application/json",
-//            "Authorization": APIKey.accessToken
-//        ]
-//        
-//        AF.request(url, method: .get, headers: headers)
-//            .responseDecodable(of: Credit.self) { response in
-//            completionHandler(response.result)
-//        }
-//    }
-//    
+    func search(api: NetworkRequest, completionHandler: @escaping (MovieResponse?, String?) -> Void) {
+        AF.request(api.endpoint,
+                   method: api.method,
+                   parameters: api.parameters,
+                   encoding: api.encoding,
+                   headers: api.header)
+        .validate(statusCode: 200..<500)
+        .responseDecodable(of: MovieResponse.self) { response in
+            switch response.result {
+            case .success(let value):
+                print("search SUCCESS")
+                completionHandler(value, nil)
+                
+            case .failure(let error):
+                print("search ERROR")
+                completionHandler(nil, "잠시 후 다시 시도해주세요.")
+            }
+        }
+    }
+    
 //    func searchRequest(query: String, page: Int, completionHandler: @escaping (Result<MovieResponse, AFError>) -> Void) {
 //        let url = APIURL.searchURL
 //        let parameters: Parameters = [
