@@ -59,99 +59,57 @@ class RecommendViewController: UIViewController {
     func callRequest() {
         guard let movieid else { return }
         
+        let group = DispatchGroup()
+        
         // 비슷한 영화 네트워크 통신
-        NetworkManager.shared.similar(api: .similar(id: movieid, page: pageList[0])) { data, error in
-            if let error = error {
-                print("에러 얼럿 띄우기")
-            } else {
-                if let data = data {
-                    self.urlList[0] = data.movieList.map { $0.posterImageURL }
-                    self.tableView.reloadData()
+        group.enter()
+        DispatchQueue.global().async(group: group) {
+            NetworkManager.shared.similar(api: .similar(id: movieid, page: self.pageList[0])) { data, error in
+                if let error = error {
+                    print("에러 얼럿 띄우기")
+                } else {
+                    if let data = data {
+                        self.urlList[0] = data.movieList.map { $0.posterImageURL }
+                    }
                 }
+                group.leave()
             }
         }
         
         // 추천 영화 네트워크 통신
-        NetworkManager.shared.recommend(api: .recommend(id: movieid, page: pageList[1])) { data, error in
-            if let error = error {
-                print("에러 얼럿 띄우기")
-            } else {
-                if let data = data {
-                    self.urlList[1] = data.movieList.map { $0.posterImageURL }
-                    self.tableView.reloadData()
+        group.enter()
+        DispatchQueue.global().async(group: group) {
+            NetworkManager.shared.recommend(api: .recommend(id: movieid, page: self.pageList[1])) { data, error in
+                if let error = error {
+                    print("에러 얼럿 띄우기")
+                } else {
+                    if let data = data {
+                        self.urlList[1] = data.movieList.map { $0.posterImageURL }
+                    }
                 }
+                group.leave()
             }
         }
         
         // 포스터 네트워크 통신
-        NetworkManager.shared.poster(api: .poster(id: movieid)) { data, error in
-            if let error = error {
-                print("에러 얼럿 띄우기")
-            } else {
-                if let data = data {
-                    self.urlList[2] = data.posters.map { $0.posterImageURL }
-                    self.tableView.reloadData()
+        group.enter()
+        DispatchQueue.global().async(group: group) {
+            NetworkManager.shared.poster(api: .poster(id: movieid)) { data, error in
+                if let error = error {
+                    print("에러 얼럿 띄우기")
+                } else {
+                    if let data = data {
+                        self.urlList[2] = data.posters.map { $0.posterImageURL }
+                    }
                 }
+                group.leave()
             }
         }
         
-//        let group = DispatchGroup()
-//        
-//        // 비슷한 영화 네트워크 통신
-//        group.enter()
-//        DispatchQueue.global().async(group: group) {
-//            NetworkManager.shared.similarRequest(movieId: self.movieid ?? 0, page: self.pageList[0]) { result in
-//                switch result {
-//                case .success(let value):
-//                    print("similar SUCCESS")
-//                    self.urlList[0] = value.movieList.map { $0.posterImageURL }
-//                    
-//                case .failure(let error):
-//                    print("similar ERROR")
-//                    print(error)
-//                }
-//                group.leave()
-//            }
-//        }
-//        
-//        // 추천 영화 네트워크 통신
-//        group.enter()
-//        DispatchQueue.global().async(group: group) {
-//            NetworkManager.shared.recommendRequest(movieId: self.movieid ?? 0, page: self.pageList[1]) { result in
-//                switch result {
-//                case .success(let value):
-//                    print("recommend SUCCESS")
-//                    self.urlList[1] = value.movieList.map { $0.posterImageURL }
-//                    
-//                case .failure(let error):
-//                    print("recommend ERROR")
-//                    print(error)
-//                }
-//                group.leave()
-//            }
-//        }
-//        
-//        // 포스터 네트워크 통신
-//        group.enter()
-//        DispatchQueue.global().async(group: group) {
-//            NetworkManager.shared.posterRequest(movieId: self.movieid ?? 0) { result in
-//                switch result {
-//                case .success(let value):
-//                    print("poster SUCCESS")
-//                    self.urlList[2] = value.posters.map { $0.posterImageURL }
-//                    
-//                case .failure(let error):
-//                    print("poster ERROR")
-//                    print(error)
-//                }
-//                group.leave()
-//            }
-//        }
-//        
-//        // 3개의 네트워크 통신 모두 종료한 시점에 한번만 tableview reload
-//        group.notify(queue: .main) {
-//            self.tableView.reloadData()
-//        }
+        // 3개의 네트워크 통신 모두 종료한 시점에 한번만 tableview reload
+        group.notify(queue: .main) {
+            self.tableView.reloadData()
+        }
     }
     
 }
