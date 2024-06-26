@@ -25,7 +25,7 @@ class TrendViewController: UIViewController {
             callRequest()
         }
     }
-    var movieResponse: MovieResponse?
+    var movieList: [Movie] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,7 +38,7 @@ class TrendViewController: UIViewController {
     }
     
     func setNavi() {
-        navigationItem.title = "day"
+        navigationItem.title = timeWindow.rawValue
         
         let menuButton = UIBarButtonItem(image: UIImage(systemName: "list.bullet"), style: .plain, target: self, action: #selector(menuButtonTapped))
         navigationItem.leftBarButtonItem = menuButton
@@ -81,42 +81,34 @@ class TrendViewController: UIViewController {
     }
     
     func callRequest() {
-        NetworkManager.shared.trendingRequest(timeWindow: timeWindow.rawValue) { result in
-            switch result {
-            case .success(let value):
-                self.successAction(value: value)
-            case .failure(let error):
-                self.failureAction(error: error)
+        NetworkManager.shared.trending(api: .trending(timeWindow: timeWindow)) { data, error in
+            if let error = error {
+                // 얼럿 띄우기
+                print("에러 얼럿 띄우기")
+            } else {
+                self.movieList = data ?? []
+                // TODO: main.async 필요없는 이유 알아보기
+                self.tableView.reloadData()
             }
         }
-    }
-    
-    func successAction(value: MovieResponse) {
-        print("Trending SUCCESS")
-        movieResponse = value
-        tableView.reloadData()
-    }
-    
-    func failureAction(error: AFError) {
-        print("Trending ERROR")
     }
 }
 
 extension TrendViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return movieResponse?.movieList.count ?? 0
+        return movieList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: TrendTableViewCell.identifier, for: indexPath) as! TrendTableViewCell
-        let data = movieResponse?.movieList[indexPath.row]
+        let data = movieList[indexPath.row]
         cell.configureCell(data: data)
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = CreditViewController()
-        let movie = movieResponse?.movieList[indexPath.row]
+        let movie = movieList[indexPath.row]
         vc.movie = movie
         navigationController?.pushViewController(vc, animated: true)
     }

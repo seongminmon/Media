@@ -100,11 +100,11 @@ struct Movie: Decodable {
     }
     
     var posterImageURL: URL? {
-        return URL(string: APIURL.imageURL + (posterPath ?? ""))
+        return URL(string: NetworkRequest.imageURL + (posterPath ?? ""))
     }
     
     var backdropImageURL: URL? {
-        return URL(string: APIURL.imageURL + (backdropPath ?? ""))
+        return URL(string: NetworkRequest.imageURL + (backdropPath ?? ""))
     }
     
     var grade: String {

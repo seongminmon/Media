@@ -22,6 +22,6 @@ struct Backdrop: Codable {
     }
     
     var posterImageURL: URL? {
-        return URL(string: APIURL.imageURL + (filePath ?? ""))
+        return URL(string: NetworkRequest.imageURL + (filePath ?? ""))
     }
 }

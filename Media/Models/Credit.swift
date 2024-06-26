@@ -27,6 +27,6 @@ struct Cast: Decodable {
     }
     
     var profileImageURL: URL? {
-        return URL(string: APIURL.imageURL + (profilePath ?? ""))
+        return URL(string: NetworkRequest.imageURL + (profilePath ?? ""))
     }
 }

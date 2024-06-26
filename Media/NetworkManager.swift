@@ -59,17 +59,38 @@ enum NetworkRequest {
         }
     }
     
+    var encoding: URLEncoding {
+        return URLEncoding(destination: .queryString)
+    }
+    
     var header: HTTPHeaders {
         return ["accept": "application/json",
                 "Authorization": APIKey.accessToken]
     }
     
 }
+
 class NetworkManager {
     
     // 싱글톤
     static let shared = NetworkManager()
     private init() {}
+    
+    func trending(api: NetworkRequest, completionHandler: @escaping ([Movie]?, String?) -> Void) {
+        AF.request(api.endpoint, method: api.method, parameters: api.parameters, encoding: api.encoding, headers: api.header)
+            .validate(statusCode: 200..<500)
+            .responseDecodable(of: MovieResponse.self) { response in
+                switch response.result {
+                case .success(let value):
+                    print("trending SUCCESS")
+                    completionHandler(value.movieList, nil)
+                    
+                case .failure(let error):
+                    print("trending ERROR")
+                    completionHandler(nil, "잠시 후 다시 시도해주세요.")
+                }
+            }
+    }
     
 //    func trendingRequest(timeWindow: String, completionHandler: @escaping (Result<MovieResponse, AFError>) -> Void) {
 //        let url = APIURL.trendingURL + timeWindow

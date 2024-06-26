@@ -75,15 +75,15 @@ class CreditViewController: UIViewController {
     }
     
     func callRequest() {
-        guard let movie else { return }
-        NetworkManager.shared.creditRequest(movieId: movie.id) { result in
-            switch result {
-            case .success(let value):
-                self.successAction(value: value)
-            case .failure(let error):
-                self.failureAction(error: error)
-            }
-        }
+//        guard let movie else { return }
+//        NetworkManager.shared.creditRequest(movieId: movie.id) { result in
+//            switch result {
+//            case .success(let value):
+//                self.successAction(value: value)
+//            case .failure(let error):
+//                self.failureAction(error: error)
+//            }
+//        }
     }
     
     func successAction(value: Credit) {

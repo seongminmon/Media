@@ -93,14 +93,14 @@ class SearchViewController: UIViewController {
     }
     
     func callRequest(query: String, page: Int) {
-        NetworkManager.shared.searchRequest(query: query, page: page) { result in
-            switch result {
-            case .success(let value):
-                self.successAction(value: value)
-            case .failure(let error):
-                self.failureAction(error: error)
-            }
-        }
+//        NetworkManager.shared.searchRequest(query: query, page: page) { result in
+//            switch result {
+//            case .success(let value):
+//                self.successAction(value: value)
+//            case .failure(let error):
+//                self.failureAction(error: error)
+//            }
+//        }
     }
     
     func successAction(value: MovieResponse) {

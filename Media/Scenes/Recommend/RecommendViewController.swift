@@ -57,63 +57,63 @@ class RecommendViewController: UIViewController {
     }
     
     func fetchData() {
-        let group = DispatchGroup()
-        
-        // 비슷한 영화 네트워크 통신
-        group.enter()
-        DispatchQueue.global().async(group: group) {
-            NetworkManager.shared.similarRequest(movieId: self.movieid ?? 0, page: self.pageList[0]) { result in
-                switch result {
-                case .success(let value):
-                    print("similar SUCCESS")
-                    self.urlList[0] = value.movieList.map { $0.posterImageURL }
-                    
-                case .failure(let error):
-                    print("similar ERROR")
-                    print(error)
-                }
-                group.leave()
-            }
-        }
-        
-        // 추천 영화 네트워크 통신
-        group.enter()
-        DispatchQueue.global().async(group: group) {
-            NetworkManager.shared.recommendRequest(movieId: self.movieid ?? 0, page: self.pageList[1]) { result in
-                switch result {
-                case .success(let value):
-                    print("recommend SUCCESS")
-                    self.urlList[1] = value.movieList.map { $0.posterImageURL }
-                    
-                case .failure(let error):
-                    print("recommend ERROR")
-                    print(error)
-                }
-                group.leave()
-            }
-        }
-        
-        // 포스터 네트워크 통신
-        group.enter()
-        DispatchQueue.global().async(group: group) {
-            NetworkManager.shared.posterRequest(movieId: self.movieid ?? 0) { result in
-                switch result {
-                case .success(let value):
-                    print("poster SUCCESS")
-                    self.urlList[2] = value.posters.map { $0.posterImageURL }
-                    
-                case .failure(let error):
-                    print("poster ERROR")
-                    print(error)
-                }
-                group.leave()
-            }
-        }
-        
-        // 3개의 네트워크 통신 모두 종료한 시점에 한번만 tableview reload
-        group.notify(queue: .main) {
-            self.tableView.reloadData()
-        }
+//        let group = DispatchGroup()
+//        
+//        // 비슷한 영화 네트워크 통신
+//        group.enter()
+//        DispatchQueue.global().async(group: group) {
+//            NetworkManager.shared.similarRequest(movieId: self.movieid ?? 0, page: self.pageList[0]) { result in
+//                switch result {
+//                case .success(let value):
+//                    print("similar SUCCESS")
+//                    self.urlList[0] = value.movieList.map { $0.posterImageURL }
+//                    
+//                case .failure(let error):
+//                    print("similar ERROR")
+//                    print(error)
+//                }
+//                group.leave()
+//            }
+//        }
+//        
+//        // 추천 영화 네트워크 통신
+//        group.enter()
+//        DispatchQueue.global().async(group: group) {
+//            NetworkManager.shared.recommendRequest(movieId: self.movieid ?? 0, page: self.pageList[1]) { result in
+//                switch result {
+//                case .success(let value):
+//                    print("recommend SUCCESS")
+//                    self.urlList[1] = value.movieList.map { $0.posterImageURL }
+//                    
+//                case .failure(let error):
+//                    print("recommend ERROR")
+//                    print(error)
+//                }
+//                group.leave()
+//            }
+//        }
+//        
+//        // 포스터 네트워크 통신
+//        group.enter()
+//        DispatchQueue.global().async(group: group) {
+//            NetworkManager.shared.posterRequest(movieId: self.movieid ?? 0) { result in
+//                switch result {
+//                case .success(let value):
+//                    print("poster SUCCESS")
+//                    self.urlList[2] = value.posters.map { $0.posterImageURL }
+//                    
+//                case .failure(let error):
+//                    print("poster ERROR")
+//                    print(error)
+//                }
+//                group.leave()
+//            }
+//        }
+//        
+//        // 3개의 네트워크 통신 모두 종료한 시점에 한번만 tableview reload
+//        group.notify(queue: .main) {
+//            self.tableView.reloadData()
+//        }
     }
     
 }
