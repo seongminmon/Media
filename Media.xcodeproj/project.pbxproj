@@ -34,6 +34,7 @@
 		24356B072C2AB9F2000D2DF1 /* ImageResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24356B062C2AB9F2000D2DF1 /* ImageResponse.swift */; };
 		24356B122C2C086A000D2DF1 /* NetworkRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24356B112C2C086A000D2DF1 /* NetworkRequest.swift */; };
 		24356B162C2C092C000D2DF1 /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24356B152C2C092C000D2DF1 /* BaseTableViewCell.swift */; };
+		24356B182C2C0E62000D2DF1 /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24356B172C2C0E62000D2DF1 /* BaseCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -63,6 +64,7 @@
 		24356B062C2AB9F2000D2DF1 /* ImageResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageResponse.swift; sourceTree = "<group>"; };
 		24356B112C2C086A000D2DF1 /* NetworkRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequest.swift; sourceTree = "<group>"; };
 		24356B152C2C092C000D2DF1 /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
+		24356B172C2C0E62000D2DF1 /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -195,6 +197,7 @@
 			isa = PBXGroup;
 			children = (
 				24356B152C2C092C000D2DF1 /* BaseTableViewCell.swift */,
+				24356B172C2C0E62000D2DF1 /* BaseCollectionViewCell.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -295,6 +298,7 @@
 				24356AA02C2938C3000D2DF1 /* AppDelegate.swift in Sources */,
 				24356ADE2C2974CD000D2DF1 /* UIViewController+.swift in Sources */,
 				24356AD12C2968B1000D2DF1 /* OverviewCreditCell.swift in Sources */,
+				24356B182C2C0E62000D2DF1 /* BaseCollectionViewCell.swift in Sources */,
 				24356B122C2C086A000D2DF1 /* NetworkRequest.swift in Sources */,
 				24356AB82C29391A000D2DF1 /* APIKey.swift in Sources */,
 				24356AA22C2938C3000D2DF1 /* SceneDelegate.swift in Sources */,

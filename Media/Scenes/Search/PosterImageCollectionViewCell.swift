@@ -10,32 +10,21 @@ import Kingfisher
 import SnapKit
 
 // MARK: - 재활용 (검색, 비슷한 영화, 추천 영화, 포스터)
-class PosterImageCollectionViewCell: UICollectionViewCell {
+class PosterImageCollectionViewCell: BaseCollectionViewCell {
     
     let posterImageView = UIImageView()
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        addSubviews()
-        setLayout()
-        setUI()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    func addSubviews() {
+
+    override func addSubviews() {
         contentView.addSubview(posterImageView)
     }
     
-    func setLayout() {
+    override func configureLayout() {
         posterImageView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
     }
     
-    func setUI() {
+    override func configureView() {
         posterImageView.backgroundColor = .gray
         posterImageView.contentMode = .scaleAspectFill
         posterImageView.clipsToBounds = true
