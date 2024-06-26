@@ -75,25 +75,15 @@ class CreditViewController: UIViewController {
     }
     
     func callRequest() {
-//        guard let movie else { return }
-//        NetworkManager.shared.creditRequest(movieId: movie.id) { result in
-//            switch result {
-//            case .success(let value):
-//                self.successAction(value: value)
-//            case .failure(let error):
-//                self.failureAction(error: error)
-//            }
-//        }
-    }
-    
-    func successAction(value: Credit) {
-        print("Credit SUCCESS")
-        credit = value
-        tableView.reloadData()
-    }
-    
-    func failureAction(error: AFError) {
-        print("Credit ERROR")
+        guard let movie else { return }
+        NetworkManager.shared.credit(api: .credit(id: movie.id)) { data, error in
+            if let error = error {
+                print("에러 얼럿 띄우기")
+            } else {
+                self.credit = data
+                self.tableView.reloadData()
+            }
+        }
     }
 }
 

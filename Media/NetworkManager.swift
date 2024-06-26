@@ -46,9 +46,9 @@ enum NetworkRequest {
     
     var parameters: Parameters {
         switch self {
-        case .trending(let timeWindow):
+        case .trending, .credit:
             return ["language": "ko-KR"]
-        case .credit, .poster:
+        case .poster:
             return ["": ""]
         case .search(let query, let page):
             return ["query": query,
@@ -77,19 +77,43 @@ class NetworkManager {
     private init() {}
     
     func trending(api: NetworkRequest, completionHandler: @escaping ([Movie]?, String?) -> Void) {
-        AF.request(api.endpoint, method: api.method, parameters: api.parameters, encoding: api.encoding, headers: api.header)
-            .validate(statusCode: 200..<500)
-            .responseDecodable(of: MovieResponse.self) { response in
-                switch response.result {
-                case .success(let value):
-                    print("trending SUCCESS")
-                    completionHandler(value.movieList, nil)
-                    
-                case .failure(let error):
-                    print("trending ERROR")
-                    completionHandler(nil, "잠시 후 다시 시도해주세요.")
-                }
+        AF.request(api.endpoint,
+                   method: api.method,
+                   parameters: api.parameters,
+                   encoding: api.encoding,
+                   headers: api.header)
+        .validate(statusCode: 200..<500)
+        .responseDecodable(of: MovieResponse.self) { response in
+            switch response.result {
+            case .success(let value):
+                print("trending SUCCESS")
+                completionHandler(value.movieList, nil)
+                
+            case .failure(let error):
+                print("trending ERROR")
+                completionHandler(nil, "잠시 후 다시 시도해주세요.")
             }
+        }
+    }
+    
+    func credit(api: NetworkRequest, completionHandler: @escaping (Credit?, String?) -> Void) {
+        AF.request(api.endpoint,
+                   method: api.method,
+                   parameters: api.parameters,
+                   encoding: api.encoding,
+                   headers: api.header)
+        .validate(statusCode: 200..<500)
+        .responseDecodable(of: Credit.self) { response in
+            switch response.result {
+            case .success(let value):
+                print("credit SUCCESS")
+                completionHandler(value, nil)
+                
+            case .failure(let error):
+                print("credit ERROR")
+                completionHandler(nil, "잠시 후 다시 시도해주세요.")
+            }
+        }
     }
     
 //    func trendingRequest(timeWindow: String, completionHandler: @escaping (Result<MovieResponse, AFError>) -> Void) {
