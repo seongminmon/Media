@@ -51,7 +51,8 @@ enum NetworkRequest {
         case .poster:
             return ["": ""]
         case .search(let query, let page):
-            return ["query": query,
+            return ["language": "ko-KR",
+                    "query": query,
                     "page": page]
         case .similar(_, let page), .recommend(_, let page):
             return ["language": "ko-KR",
@@ -136,68 +137,64 @@ class NetworkManager {
         }
     }
     
-//    func searchRequest(query: String, page: Int, completionHandler: @escaping (Result<MovieResponse, AFError>) -> Void) {
-//        let url = APIURL.searchURL
-//        let parameters: Parameters = [
-//            "query" : query,
-//            "page" : page
-//        ]
-//        let headers: HTTPHeaders = [
-//            "accept": "application/json",
-//            "Authorization": APIKey.accessToken
-//        ]
-//        
-//        AF.request(url, method: .get, parameters: parameters, headers: headers)
-//            .responseDecodable(of: MovieResponse.self) { response in
-//            completionHandler(response.result)
-//        }
-//    }
-//    
-//    func similarRequest(movieId: Int, page: Int, completionHandler: @escaping (Result<MovieResponse, AFError>) -> Void) {
-//        let url = APIURL.movieURL + "\(movieId)" + "/similar"
-//        let parameters: Parameters = [
-//            "language" : "en-US",
-//            "page" : page
-//        ]
-//        let headers: HTTPHeaders = [
-//            "accept": "application/json",
-//            "Authorization": APIKey.accessToken
-//        ]
-//        
-//        AF.request(url, method: .get, parameters: parameters, headers: headers)
-//            .responseDecodable(of: MovieResponse.self) { response in
-//            completionHandler(response.result)
-//        }
-//    }
-//    
-//    func recommendRequest(movieId: Int, page: Int, completionHandler: @escaping (Result<MovieResponse, AFError>) -> Void) {
-//        let url = APIURL.movieURL + "\(movieId)" + "/recommendations"
-//        let parameters: Parameters = [
-//            "language" : "en-US",
-//            "page" : page
-//        ]
-//        let headers: HTTPHeaders = [
-//            "accept": "application/json",
-//            "Authorization": APIKey.accessToken
-//        ]
-//        
-//        AF.request(url, method: .get, parameters: parameters, headers: headers)
-//            .responseDecodable(of: MovieResponse.self) { response in
-//            completionHandler(response.result)
-//        }
-//    }
-//    
-//    func posterRequest(movieId: Int, completionHandler: @escaping (Result<ImageResponse, AFError>) -> Void) {
-//        let url = APIURL.movieURL + "\(movieId)" + "/images"
-//        let headers: HTTPHeaders = [
-//            "accept": "application/json",
-//            "Authorization": APIKey.accessToken
-//        ]
-//        
-//        AF.request(url, method: .get, headers: headers)
-//            .responseDecodable(of: ImageResponse.self) { response in
-//            completionHandler(response.result)
-//        }
-//    }
+    func similar(api: NetworkRequest, completionHandler: @escaping (MovieResponse?, String?) -> Void) {
+        AF.request(api.endpoint,
+                   method: api.method,
+                   parameters: api.parameters,
+                   encoding: api.encoding,
+                   headers: api.header)
+        .validate(statusCode: 200..<500)
+        .responseDecodable(of: MovieResponse.self) { response in
+            switch response.result {
+            case .success(let value):
+                print("similar SUCCESS")
+                completionHandler(value, nil)
+                
+            case .failure(let error):
+                print("similar ERROR")
+                completionHandler(nil, "잠시 후 다시 시도해주세요.")
+            }
+        }
+    }
+    
+    func recommend(api: NetworkRequest, completionHandler: @escaping (MovieResponse?, String?) -> Void) {
+        AF.request(api.endpoint,
+                   method: api.method,
+                   parameters: api.parameters,
+                   encoding: api.encoding,
+                   headers: api.header)
+        .validate(statusCode: 200..<500)
+        .responseDecodable(of: MovieResponse.self) { response in
+            switch response.result {
+            case .success(let value):
+                print("recommend SUCCESS")
+                completionHandler(value, nil)
+                
+            case .failure(let error):
+                print("recommend ERROR")
+                completionHandler(nil, "잠시 후 다시 시도해주세요.")
+            }
+        }
+    }
+
+    func poster(api: NetworkRequest, completionHandler: @escaping (ImageResponse?, String?) -> Void) {
+        AF.request(api.endpoint,
+                   method: api.method,
+                   parameters: api.parameters,
+                   encoding: api.encoding,
+                   headers: api.header)
+        .validate(statusCode: 200..<500)
+        .responseDecodable(of: ImageResponse.self) { response in
+            switch response.result {
+            case .success(let value):
+                print("poster SUCCESS")
+                completionHandler(value, nil)
+                
+            case .failure(let error):
+                print("poster ERROR")
+                completionHandler(nil, "잠시 후 다시 시도해주세요.")
+            }
+        }
+    }
     
 }

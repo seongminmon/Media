@@ -31,7 +31,7 @@ class RecommendViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        fetchData()
+        callRequest()
         setNavi()
         addSubviews()
         setLayout()
@@ -56,7 +56,45 @@ class RecommendViewController: UIViewController {
         view.backgroundColor = .white
     }
     
-    func fetchData() {
+    func callRequest() {
+        guard let movieid else { return }
+        
+        // 비슷한 영화 네트워크 통신
+        NetworkManager.shared.similar(api: .similar(id: movieid, page: pageList[0])) { data, error in
+            if let error = error {
+                print("에러 얼럿 띄우기")
+            } else {
+                if let data = data {
+                    self.urlList[0] = data.movieList.map { $0.posterImageURL }
+                    self.tableView.reloadData()
+                }
+            }
+        }
+        
+        // 추천 영화 네트워크 통신
+        NetworkManager.shared.recommend(api: .recommend(id: movieid, page: pageList[1])) { data, error in
+            if let error = error {
+                print("에러 얼럿 띄우기")
+            } else {
+                if let data = data {
+                    self.urlList[1] = data.movieList.map { $0.posterImageURL }
+                    self.tableView.reloadData()
+                }
+            }
+        }
+        
+        // 포스터 네트워크 통신
+        NetworkManager.shared.poster(api: .poster(id: movieid)) { data, error in
+            if let error = error {
+                print("에러 얼럿 띄우기")
+            } else {
+                if let data = data {
+                    self.urlList[2] = data.posters.map { $0.posterImageURL }
+                    self.tableView.reloadData()
+                }
+            }
+        }
+        
 //        let group = DispatchGroup()
 //        
 //        // 비슷한 영화 네트워크 통신
