@@ -95,7 +95,7 @@ class SearchViewController: UIViewController {
     func callRequest(query: String, page: Int) {
         NetworkManager.shared.search(api: .search(query: query, page: page)) { data, error in
             if let error = error {
-                print("에러 얼럿 띄우기")
+                self.presentErrorAlert(title: "에러", message: error)
             } else {
                 if let data = data {
                     self.successAction(value: data)

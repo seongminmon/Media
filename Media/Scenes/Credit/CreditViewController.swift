@@ -78,7 +78,7 @@ class CreditViewController: UIViewController {
         guard let movie else { return }
         NetworkManager.shared.credit(api: .credit(id: movie.id)) { data, error in
             if let error = error {
-                print("에러 얼럿 띄우기")
+                self.presentErrorAlert(title: "에러", message: error)
             } else {
                 self.credit = data
                 self.tableView.reloadData()

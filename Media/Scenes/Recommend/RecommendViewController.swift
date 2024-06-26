@@ -66,7 +66,7 @@ class RecommendViewController: UIViewController {
         DispatchQueue.global().async(group: group) {
             NetworkManager.shared.similar(api: .similar(id: movieid, page: self.pageList[0])) { data, error in
                 if let error = error {
-                    print("에러 얼럿 띄우기")
+                    self.presentErrorAlert(title: "에러", message: error)
                 } else {
                     if let data = data {
                         self.urlList[0] = data.movieList.map { $0.posterImageURL }
@@ -81,7 +81,7 @@ class RecommendViewController: UIViewController {
         DispatchQueue.global().async(group: group) {
             NetworkManager.shared.recommend(api: .recommend(id: movieid, page: self.pageList[1])) { data, error in
                 if let error = error {
-                    print("에러 얼럿 띄우기")
+                    self.presentErrorAlert(title: "에러", message: error)
                 } else {
                     if let data = data {
                         self.urlList[1] = data.movieList.map { $0.posterImageURL }
@@ -96,7 +96,7 @@ class RecommendViewController: UIViewController {
         DispatchQueue.global().async(group: group) {
             NetworkManager.shared.poster(api: .poster(id: movieid)) { data, error in
                 if let error = error {
-                    print("에러 얼럿 띄우기")
+                    self.presentErrorAlert(title: "에러", message: error)
                 } else {
                     if let data = data {
                         self.urlList[2] = data.posters.map { $0.posterImageURL }

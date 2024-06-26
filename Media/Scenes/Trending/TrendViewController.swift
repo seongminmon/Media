@@ -48,7 +48,7 @@ class TrendViewController: UIViewController {
     }
     
     @objc func menuButtonTapped() {
-        showActionSheet(
+        presentActionSheet(
             title1: TimeWindow.day.rawValue,
             title2: TimeWindow.week.rawValue
         ) { _ in
@@ -84,7 +84,7 @@ class TrendViewController: UIViewController {
         NetworkManager.shared.trending(api: .trending(timeWindow: timeWindow)) { data, error in
             if let error = error {
                 // 얼럿 띄우기
-                print("에러 얼럿 띄우기")
+                self.presentErrorAlert(title: "에러", message: error)
             } else {
                 self.movieList = data ?? []
                 // TODO: main.async 필요없는 이유 알아보기

@@ -8,7 +8,7 @@
 import Foundation
 import Alamofire
 
-// MARK: - Enum으로 네트워크 구조 추상화
+// MARK: - 네트워크 구조 추상화
 enum NetworkRequest {
     case trending(timeWindow: TimeWindow)
     case credit(id: Int)
