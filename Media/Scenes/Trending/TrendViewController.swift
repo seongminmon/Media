@@ -87,7 +87,6 @@ class TrendViewController: UIViewController {
                 self.presentErrorAlert(title: "에러", message: error)
             } else {
                 self.movieList = data ?? []
-                // TODO: main.async 필요없는 이유 알아보기
                 self.tableView.reloadData()
             }
         }

@@ -41,6 +41,7 @@ class CreditViewController: UIViewController {
     
     var movie: Movie?       // 이전 화면에서 전달
     var credit: Credit?     // 네트워크로 받아오기
+    var isDetail: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -105,7 +106,12 @@ extension CreditViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return Sections.allCases[indexPath.section].rowHeight
+        switch Sections.allCases[indexPath.section] {
+        case .overview:
+            return UITableView.automaticDimension
+        case .main, .crew, .cast:
+            return Sections.allCases[indexPath.section].rowHeight
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -120,6 +126,8 @@ extension CreditViewController: UITableViewDelegate, UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: OverviewCreditCell.identifier, for: indexPath) as! OverviewCreditCell
             let data = movie?.overview
             cell.configureCell(data)
+            cell.delegate = self
+            cell.selectionStyle = .none
             return cell
             
         case .cast:
@@ -134,5 +142,11 @@ extension CreditViewController: UITableViewDelegate, UITableViewDataSource {
             cell.configureCellWithCrew(data)
             return cell
         }
+    }
+}
+
+extension CreditViewController: OverviewCellDelegate {
+    func seeMoreButtonTapped() {
+        tableView.reloadData()
     }
 }
