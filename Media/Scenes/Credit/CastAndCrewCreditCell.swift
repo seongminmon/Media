@@ -39,7 +39,8 @@ class CastAndCrewCreditCell: BaseTableViewCell {
         }
     }
     
-    override func configureView() {        profileImageView.contentMode = .scaleAspectFill
+    override func configureView() {
+        profileImageView.contentMode = .scaleAspectFill
         profileImageView.backgroundColor = .gray
         profileImageView.clipsToBounds = true
         profileImageView.layer.cornerRadius = 10

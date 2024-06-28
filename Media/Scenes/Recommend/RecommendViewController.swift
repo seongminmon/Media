@@ -15,7 +15,7 @@ class RecommendViewController: UIViewController {
         let tableView = UITableView()
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.rowHeight = 220
+        tableView.rowHeight = UITableView.automaticDimension // Dynamic Height
         tableView.register(RecommendTableViewCell.self, forCellReuseIdentifier: RecommendTableViewCell.identifier)
         return tableView
     }()

@@ -13,14 +13,14 @@ import SnapKit
 class PosterImageCollectionViewCell: BaseCollectionViewCell {
     
     let posterImageView = UIImageView()
-
+    
     override func addSubviews() {
         contentView.addSubview(posterImageView)
     }
     
     override func configureLayout() {
         posterImageView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.edges.equalTo(contentView.safeAreaLayoutGuide)
         }
     }
     
@@ -35,4 +35,3 @@ class PosterImageCollectionViewCell: BaseCollectionViewCell {
         posterImageView.kf.setImage(with: url)
     }
 }
-

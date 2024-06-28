@@ -88,8 +88,8 @@ class SearchViewController: UIViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.prefetchDataSource = self
-        
         collectionView.register(PosterImageCollectionViewCell.self, forCellWithReuseIdentifier: PosterImageCollectionViewCell.identifier)
+        collectionView.keyboardDismissMode = .onDrag
     }
     
     func callRequest(query: String, page: Int) {
@@ -105,7 +105,6 @@ class SearchViewController: UIViewController {
     }
     
     func successAction(value: MovieResponse) {
-        print("Search SUCCESS")
         if page == 1 {
             // 첫 검색일때 -> 교체
             movieResponse = value

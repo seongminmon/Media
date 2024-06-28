@@ -24,7 +24,6 @@ class RecommendTableViewCell: BaseTableViewCell {
         layout.minimumInteritemSpacing = cellSpacing
         layout.minimumLineSpacing = cellSpacing
         layout.sectionInset = UIEdgeInsets(top: sectionSpacing, left: sectionSpacing, bottom: sectionSpacing, right: sectionSpacing)
-        
         return layout
     }
     
@@ -42,6 +41,7 @@ class RecommendTableViewCell: BaseTableViewCell {
         collectionView.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom)
             make.horizontalEdges.bottom.equalTo(contentView.safeAreaLayoutGuide)
+            make.height.equalTo(220)
         }
     }
     
