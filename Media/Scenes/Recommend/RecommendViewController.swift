@@ -9,7 +9,7 @@ import UIKit
 import Alamofire
 import SnapKit
 
-class RecommendViewController: UIViewController {
+class RecommendViewController: BaseViewController {
     
     lazy var tableView: UITableView = {
         let tableView = UITableView()
@@ -32,28 +32,24 @@ class RecommendViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         callRequest()
-        setNavi()
-        addSubviews()
-        setLayout()
-        configureView()
     }
     
-    func setNavi() {
+    override func configureNavigationBar() {
         navigationItem.title = navTitle
     }
     
-    func addSubviews() {
+    override func addSubviews() {
         view.addSubview(tableView)
     }
     
-    func setLayout() {
+    override func configureLayout() {
         tableView.snp.makeConstraints { make in
             make.edges.equalTo(view.safeAreaLayoutGuide)
         }
     }
     
-    func configureView() {
-        view.backgroundColor = .white
+    override func configureView() {
+//        view.backgroundColor = .white
     }
     
     func callRequest() {

@@ -9,7 +9,7 @@ import UIKit
 import Alamofire
 import SnapKit
 
-class SearchViewController: UIViewController {
+class SearchViewController: BaseViewController {
     
     let searchBar = UISearchBar()
     lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout())
@@ -19,24 +19,31 @@ class SearchViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setNavi()
-        addSubviews()
-        setLayout()
-        setUI()
-        setCollectionView()
+        configureCollectionView()
     }
     
-    func setNavi() {
-        navigationItem.title = "영화 검색"
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.tintColor = .white
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
     }
     
-    func addSubviews() {
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.navigationBar.tintColor = .black
+        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.black]
+    }
+    
+    override func configureNavigationBar() {
+        navigationItem.title = "영화 검색"
+    }
+    
+    override func addSubviews() {
         view.addSubview(searchBar)
         view.addSubview(collectionView)
     }
     
-    func setLayout() {
+    override func configureLayout() {
         searchBar.snp.makeConstraints { make in
             make.top.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
             make.height.equalTo(44)
@@ -48,18 +55,7 @@ class SearchViewController: UIViewController {
         }
     }
     
-    func collectionViewLayout() -> UICollectionViewLayout {
-        let layout = UICollectionViewFlowLayout()
-        let width = (UIScreen.main.bounds.width - 40) / 3
-        layout.itemSize = CGSize(width: width, height: width * 1.5)
-        layout.scrollDirection = .vertical
-        layout.minimumInteritemSpacing = 10
-        layout.minimumLineSpacing = 10
-        layout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-        return layout
-    }
-    
-    func setUI() {
+    override func configureView() {
         view.backgroundColor = .black
         collectionView.backgroundColor = .black
         
@@ -84,7 +80,18 @@ class SearchViewController: UIViewController {
         searchBar.searchTextField.leftView?.tintColor = .lightGray
     }
     
-    func setCollectionView() {
+    func collectionViewLayout() -> UICollectionViewLayout {
+        let layout = UICollectionViewFlowLayout()
+        let width = (UIScreen.main.bounds.width - 40) / 3
+        layout.itemSize = CGSize(width: width, height: width * 1.5)
+        layout.scrollDirection = .vertical
+        layout.minimumInteritemSpacing = 10
+        layout.minimumLineSpacing = 10
+        layout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        return layout
+    }
+    
+    func configureCollectionView() {
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.prefetchDataSource = self

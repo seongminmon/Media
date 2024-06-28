@@ -14,7 +14,7 @@ enum TimeWindow: String {
     case week
 }
 
-class TrendViewController: UIViewController {
+class TrendViewController: BaseViewController {
     
     let tableView = UITableView()
     
@@ -30,14 +30,9 @@ class TrendViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         callRequest()
-        
-        setNavi()
-        addSubviews()
-        setLayout()
-        setTableView()
     }
     
-    func setNavi() {
+    override func configureNavigationBar() {
         navigationItem.title = timeWindow.rawValue
         
         let menuButton = UIBarButtonItem(image: UIImage(systemName: "list.bullet"), style: .plain, target: self, action: #selector(menuButtonTapped))
@@ -63,17 +58,17 @@ class TrendViewController: UIViewController {
         navigationController?.pushViewController(vc, animated: true)
     }
     
-    func addSubviews() {
+    override func addSubviews() {
         view.addSubview(tableView)
     }
     
-    func setLayout() {
+    override func configureLayout() {
         tableView.snp.makeConstraints { make in
             make.edges.equalTo(view.safeAreaLayoutGuide)
         }
     }
     
-    func setTableView() {
+    override func configureView() {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.rowHeight = UIScreen.main.bounds.width * 1.4

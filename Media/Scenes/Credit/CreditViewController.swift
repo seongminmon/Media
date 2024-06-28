@@ -35,7 +35,7 @@ enum Sections: Int, CaseIterable {
     }
 }
 
-class CreditViewController: UIViewController {
+class CreditViewController: BaseViewController {
     
     let tableView = UITableView()
     
@@ -46,28 +46,23 @@ class CreditViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         callRequest()
-        
-        setNavi()
-        addSubviews()
-        setLayout()
-        setTableView()
     }
     
-    func setNavi() {
+    override func configureNavigationBar() {
         navigationItem.title = "출연/제작"
     }
     
-    func addSubviews() {
+    override func addSubviews() {
         view.addSubview(tableView)
     }
     
-    func setLayout() {
+    override func configureLayout() {
         tableView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
     }
     
-    func setTableView() {
+    override func configureView() {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(MainCreditCell.self, forCellReuseIdentifier: MainCreditCell.identifier)
