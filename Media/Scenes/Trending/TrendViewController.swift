@@ -76,12 +76,13 @@ class TrendViewController: BaseViewController {
     }
     
     func callRequest() {
-        NetworkManager.shared.trending(api: .trending(timeWindow: timeWindow)) { data, error in
+        NetworkManager.shared.request(api: .trending(timeWindow: timeWindow), model: MovieResponse.self) { data, error in
             if let error = error {
-                // 얼럿 띄우기
+                print("Trending ERROR")
                 self.presentErrorAlert(title: "에러", message: error)
-            } else {
-                self.movieList = data ?? []
+            } else if let data = data {
+                print("Trending SUCCESS")
+                self.movieList = data.movieList
                 self.tableView.reloadData()
             }
         }

@@ -72,10 +72,12 @@ class CreditViewController: BaseViewController {
     
     func callRequest() {
         guard let movie else { return }
-        NetworkManager.shared.credit(api: .credit(id: movie.id)) { data, error in
+        NetworkManager.shared.request(api: .credit(id: movie.id), model: Credit.self) { data, error in
             if let error = error {
+                print("Credit ERROR")
                 self.presentErrorAlert(title: "에러", message: error)
-            } else {
+            } else if let data = data {
+                print("Credit SUCCESS")
                 self.credit = data
                 self.tableView.reloadData()
             }

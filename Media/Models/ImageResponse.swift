@@ -7,14 +7,14 @@
 
 import Foundation
 
-struct ImageResponse: Codable {
+struct ImageResponse: Decodable {
 //    let backdrops: [Backdrop]
 //    let id: Int
 //    let logos: [Backdrop]
     let posters: [Backdrop]
 }
 
-struct Backdrop: Codable {
+struct Backdrop: Decodable {
     let filePath: String?
 
     enum CodingKeys: String, CodingKey {

@@ -60,13 +60,13 @@ class RecommendViewController: BaseViewController {
         // 비슷한 영화 네트워크 통신
         group.enter()
         DispatchQueue.global().async(group: group) {
-            NetworkManager.shared.similar(api: .similar(id: movieid, page: self.pageList[0])) { data, error in
+            NetworkManager.shared.request(api: .similar(id: movieid, page: self.pageList[0]), model: MovieResponse.self) { data, error in
                 if let error = error {
+                    print("Similar ERROR")
                     self.presentErrorAlert(title: "에러", message: error)
-                } else {
-                    if let data = data {
-                        self.urlList[0] = data.movieList.map { $0.posterImageURL }
-                    }
+                } else if let data = data {
+                    print("Similar SUCCESS")
+                    self.urlList[0] = data.movieList.map { $0.posterImageURL }
                 }
                 group.leave()
             }
@@ -75,13 +75,13 @@ class RecommendViewController: BaseViewController {
         // 추천 영화 네트워크 통신
         group.enter()
         DispatchQueue.global().async(group: group) {
-            NetworkManager.shared.recommend(api: .recommend(id: movieid, page: self.pageList[1])) { data, error in
+            NetworkManager.shared.request(api: .recommend(id: movieid, page: self.pageList[1]), model: MovieResponse.self) { data, error in
                 if let error = error {
+                    print("Recommend ERROR")
                     self.presentErrorAlert(title: "에러", message: error)
-                } else {
-                    if let data = data {
-                        self.urlList[1] = data.movieList.map { $0.posterImageURL }
-                    }
+                } else if let data = data {
+                    print("Recommend SUCCESS")
+                    self.urlList[1] = data.movieList.map { $0.posterImageURL }
                 }
                 group.leave()
             }
@@ -90,13 +90,13 @@ class RecommendViewController: BaseViewController {
         // 포스터 네트워크 통신
         group.enter()
         DispatchQueue.global().async(group: group) {
-            NetworkManager.shared.poster(api: .poster(id: movieid)) { data, error in
+            NetworkManager.shared.request(api: .poster(id: movieid), model: ImageResponse.self) { data, error in
                 if let error = error {
+                    print("Poster ERROR")
                     self.presentErrorAlert(title: "에러", message: error)
-                } else {
-                    if let data = data {
-                        self.urlList[2] = data.posters.map { $0.posterImageURL }
-                    }
+                } else if let data = data {
+                    print("Poster SUCCESS")
+                    self.urlList[2] = data.posters.map { $0.posterImageURL }
                 }
                 group.leave()
             }

@@ -100,13 +100,13 @@ class SearchViewController: BaseViewController {
     }
     
     func callRequest(query: String, page: Int) {
-        NetworkManager.shared.search(api: .search(query: query, page: page)) { data, error in
+        NetworkManager.shared.request(api: .search(query: query, page: page), model: MovieResponse.self) { data, error in
             if let error = error {
+                print("Search ERROR")
                 self.presentErrorAlert(title: "에러", message: error)
-            } else {
-                if let data = data {
-                    self.successAction(value: data)
-                }
+            } else if let data = data {
+                print("Search SUCCESS")
+                self.successAction(value: data)
             }
         }
     }
