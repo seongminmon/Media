@@ -9,10 +9,10 @@ import UIKit
 import Alamofire
 import SnapKit
 
-class SearchViewController: BaseViewController {
+final class SearchViewController: BaseViewController {
     
     let searchBar = UISearchBar()
-    lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout())
+    lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: BaseCollectionViewCell.searchCollectionViewLayout())
     
     var movieResponse: MovieResponse?
     var page = 1
@@ -78,17 +78,6 @@ class SearchViewController: BaseViewController {
         searchBar.tintColor = .lightGray
         // icon color
         searchBar.searchTextField.leftView?.tintColor = .lightGray
-    }
-    
-    func collectionViewLayout() -> UICollectionViewLayout {
-        let layout = UICollectionViewFlowLayout()
-        let width = (UIScreen.main.bounds.width - 40) / 3
-        layout.itemSize = CGSize(width: width, height: width * 1.5)
-        layout.scrollDirection = .vertical
-        layout.minimumInteritemSpacing = 10
-        layout.minimumLineSpacing = 10
-        layout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-        return layout
     }
     
     func configureCollectionView() {

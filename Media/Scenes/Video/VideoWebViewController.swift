@@ -9,7 +9,7 @@ import UIKit
 import WebKit
 import SnapKit
 
-class VideoWebViewController: BaseViewController {
+final class VideoWebViewController: BaseViewController {
     
     let webView = WKWebView()
     let indicator = UIActivityIndicatorView()

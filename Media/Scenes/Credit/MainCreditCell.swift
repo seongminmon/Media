@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MainCreditCell: BaseTableViewCell {
+final class MainCreditCell: BaseTableViewCell {
     
     let backgroundImageView = UIImageView()
     let posterImageView = UIImageView()

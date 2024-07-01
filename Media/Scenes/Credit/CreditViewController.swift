@@ -35,7 +35,7 @@ enum Sections: Int, CaseIterable {
     }
 }
 
-class CreditViewController: BaseViewController {
+final class CreditViewController: BaseViewController {
     
     let tableView = UITableView()
     

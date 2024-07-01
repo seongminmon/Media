@@ -11,7 +11,7 @@ protocol OverviewCellDelegate {
     func seeMoreButtonTapped()
 }
 
-class OverviewCreditCell: BaseTableViewCell {
+final class OverviewCreditCell: BaseTableViewCell {
     
     let descriptionLabel = UILabel()
     let seeMoreButton = UIButton()

@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class VideoTableViewCell: BaseTableViewCell {
+final class VideoTableViewCell: BaseTableViewCell {
     
     let titleLabel = UILabel()
     let detailImageView = UIImageView()

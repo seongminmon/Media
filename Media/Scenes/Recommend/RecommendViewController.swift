@@ -9,7 +9,7 @@ import UIKit
 import Alamofire
 import SnapKit
 
-class RecommendViewController: BaseViewController {
+final class RecommendViewController: BaseViewController {
     
     lazy var tableView: UITableView = {
         let tableView = UITableView()

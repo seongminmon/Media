@@ -9,7 +9,7 @@ import UIKit
 import Kingfisher
 import SnapKit
 
-class TrendTableViewCell: BaseTableViewCell {
+final class TrendTableViewCell: BaseTableViewCell {
     
     let dateLabel = UILabel()
     let genreLabel = UILabel()

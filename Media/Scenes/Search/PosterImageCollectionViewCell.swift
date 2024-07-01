@@ -10,7 +10,7 @@ import Kingfisher
 import SnapKit
 
 // MARK: - 재활용 (검색, 비슷한 영화, 추천 영화, 포스터)
-class PosterImageCollectionViewCell: BaseCollectionViewCell {
+final class PosterImageCollectionViewCell: BaseCollectionViewCell {
     
     let posterImageView = UIImageView()
     

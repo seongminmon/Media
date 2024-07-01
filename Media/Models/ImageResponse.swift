@@ -8,9 +8,6 @@
 import Foundation
 
 struct ImageResponse: Decodable {
-//    let backdrops: [Backdrop]
-//    let id: Int
-//    let logos: [Backdrop]
     let posters: [Backdrop]
 }
 

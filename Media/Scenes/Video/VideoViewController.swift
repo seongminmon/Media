@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class VideoViewController: BaseViewController {
+final class VideoViewController: BaseViewController {
 
     var tableView = UITableView()
     

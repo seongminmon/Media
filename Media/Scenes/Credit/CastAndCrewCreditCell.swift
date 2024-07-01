@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CastAndCrewCreditCell: BaseTableViewCell {
+final class CastAndCrewCreditCell: BaseTableViewCell {
     
     let profileImageView = UIImageView()
     let nameLabel = UILabel()

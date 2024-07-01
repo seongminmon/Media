@@ -14,7 +14,7 @@ enum TimeWindow: String {
     case week
 }
 
-class TrendViewController: BaseViewController {
+final class TrendViewController: BaseViewController {
     
     let tableView = UITableView()
     

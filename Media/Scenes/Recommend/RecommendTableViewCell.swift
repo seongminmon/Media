@@ -8,24 +8,10 @@
 import UIKit
 import SnapKit
 
-class RecommendTableViewCell: BaseTableViewCell {
+final class RecommendTableViewCell: BaseTableViewCell {
     
     let titleLabel = UILabel()
-    let collectionView = UICollectionView(frame: .zero, collectionViewLayout: RecommendTableViewCell.collectionViewLayout())
-    
-    static func collectionViewLayout() -> UICollectionViewLayout {
-        let layout = UICollectionViewFlowLayout()
-        
-        let sectionSpacing: CGFloat = 10
-        let cellSpacing: CGFloat = 10
-        
-        layout.itemSize = CGSize(width: 150, height: 200)
-        layout.scrollDirection = .horizontal
-        layout.minimumInteritemSpacing = cellSpacing
-        layout.minimumLineSpacing = cellSpacing
-        layout.sectionInset = UIEdgeInsets(top: sectionSpacing, left: sectionSpacing, bottom: sectionSpacing, right: sectionSpacing)
-        return layout
-    }
+    let collectionView = UICollectionView(frame: .zero, collectionViewLayout: BaseCollectionViewCell.recommendCollectionViewLayout())
     
     override func addSubviews() {
         contentView.addSubview(titleLabel)
