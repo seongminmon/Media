@@ -16,8 +16,10 @@ enum NetworkRequest {
     case similar(id: Int, page: Int)
     case recommend(id: Int, page: Int)
     case poster(id: Int)
+    case video(id: Int)
     
     static let imageURL = "https://image.tmdb.org/t/p/w500/"
+    static let videoURL = "https://www.youtube.com/watch?v="
     
     var baseURL: String {
         return "https://api.themoviedb.org/3/"
@@ -37,6 +39,8 @@ enum NetworkRequest {
             return URL(string: baseURL + "movie/" + "\(id)" + "/recommendations")!
         case .poster(let id):
             return URL(string: baseURL + "movie/" + "\(id)" + "/images")!
+        case .video(id: let id):
+            return URL(string: baseURL + "movie/" + "\(id)" + "/videos")!
         }
     }
     
@@ -46,7 +50,7 @@ enum NetworkRequest {
     
     var parameters: Parameters {
         switch self {
-        case .trending, .credit:
+        case .trending, .credit, .video:
             return ["language": "ko-KR"]
         case .poster:
             return ["": ""]

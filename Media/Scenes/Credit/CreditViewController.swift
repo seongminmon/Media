@@ -50,6 +50,14 @@ class CreditViewController: BaseViewController {
     
     override func configureNavigationBar() {
         navigationItem.title = "출연/제작"
+        let videoButton = UIBarButtonItem(image: UIImage(systemName: "video"), style: .plain, target: self, action: #selector(videoButtonTapped))
+        navigationItem.rightBarButtonItem = videoButton
+    }
+    
+    @objc func videoButtonTapped() {
+        let vc = VideoViewController()
+        vc.movie = movie
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     override func addSubviews() {

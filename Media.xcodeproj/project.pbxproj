@@ -37,6 +37,9 @@
 		24356B182C2C0E62000D2DF1 /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24356B172C2C0E62000D2DF1 /* BaseCollectionViewCell.swift */; };
 		24B3BD2A2C2EA2050088CDB7 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B3BD292C2EA2050088CDB7 /* BaseViewController.swift */; };
 		24B3BD562C3289B10088CDB7 /* NasaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B3BD552C3289B10088CDB7 /* NasaViewController.swift */; };
+		24B3BD582C329D710088CDB7 /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B3BD572C329D710088CDB7 /* Video.swift */; };
+		24B3BD5B2C329EC00088CDB7 /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B3BD5A2C329EC00088CDB7 /* VideoViewController.swift */; };
+		24B3BD5D2C32A1590088CDB7 /* VideoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B3BD5C2C32A1590088CDB7 /* VideoTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -69,6 +72,9 @@
 		24356B172C2C0E62000D2DF1 /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
 		24B3BD292C2EA2050088CDB7 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		24B3BD552C3289B10088CDB7 /* NasaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NasaViewController.swift; sourceTree = "<group>"; };
+		24B3BD572C329D710088CDB7 /* Video.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
+		24B3BD5A2C329EC00088CDB7 /* VideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoViewController.swift; sourceTree = "<group>"; };
+		24B3BD5C2C32A1590088CDB7 /* VideoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,7 +113,6 @@
 			children = (
 				24356A9F2C2938C3000D2DF1 /* AppDelegate.swift */,
 				24356AA12C2938C3000D2DF1 /* SceneDelegate.swift */,
-				24B3BD552C3289B10088CDB7 /* NasaViewController.swift */,
 				24356B132C2C0884000D2DF1 /* Network */,
 				24356ACF2C29688E000D2DF1 /* Models */,
 				24356B052C2AB5DA000D2DF1 /* Extension */,
@@ -123,8 +128,10 @@
 		24356ACE2C29687F000D2DF1 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				24B3BD552C3289B10088CDB7 /* NasaViewController.swift */,
 				24356AD62C296909000D2DF1 /* Trending */,
 				24356AD72C296914000D2DF1 /* Credit */,
+				24B3BD592C329EA70088CDB7 /* Video */,
 				24356ADA2C296D2E000D2DF1 /* Search */,
 				24356AE12C2986B7000D2DF1 /* Recommend */,
 			);
@@ -137,6 +144,7 @@
 				24356AC62C294E58000D2DF1 /* Movie.swift */,
 				24356ACA2C2966A2000D2DF1 /* Credit.swift */,
 				24356B062C2AB9F2000D2DF1 /* ImageResponse.swift */,
+				24B3BD572C329D710088CDB7 /* Video.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -206,6 +214,15 @@
 				24B3BD292C2EA2050088CDB7 /* BaseViewController.swift */,
 			);
 			path = Base;
+			sourceTree = "<group>";
+		};
+		24B3BD592C329EA70088CDB7 /* Video */ = {
+			isa = PBXGroup;
+			children = (
+				24B3BD5A2C329EC00088CDB7 /* VideoViewController.swift */,
+				24B3BD5C2C32A1590088CDB7 /* VideoTableViewCell.swift */,
+			);
+			path = Video;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -307,12 +324,15 @@
 				24356AD12C2968B1000D2DF1 /* OverviewCreditCell.swift in Sources */,
 				24356B182C2C0E62000D2DF1 /* BaseCollectionViewCell.swift in Sources */,
 				24356B122C2C086A000D2DF1 /* NetworkRequest.swift in Sources */,
+				24B3BD5B2C329EC00088CDB7 /* VideoViewController.swift in Sources */,
 				24356AB82C29391A000D2DF1 /* APIKey.swift in Sources */,
 				24356AA22C2938C3000D2DF1 /* SceneDelegate.swift in Sources */,
 				24356AE02C2986B4000D2DF1 /* RecommendViewController.swift in Sources */,
 				24B3BD562C3289B10088CDB7 /* NasaViewController.swift in Sources */,
 				24356AD32C2968C7000D2DF1 /* MainCreditCell.swift in Sources */,
 				24356ADC2C296E19000D2DF1 /* PosterImageCollectionViewCell.swift in Sources */,
+				24B3BD582C329D710088CDB7 /* Video.swift in Sources */,
+				24B3BD5D2C32A1590088CDB7 /* VideoTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
