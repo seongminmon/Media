@@ -57,7 +57,6 @@ final class SearchViewController: BaseViewController {
     
     override func configureView() {
         view.backgroundColor = .black
-        collectionView.backgroundColor = .black
         
         searchBar.delegate = self
         // placeholder color
@@ -86,6 +85,7 @@ final class SearchViewController: BaseViewController {
         collectionView.prefetchDataSource = self
         collectionView.register(PosterImageCollectionViewCell.self, forCellWithReuseIdentifier: PosterImageCollectionViewCell.identifier)
         collectionView.keyboardDismissMode = .onDrag
+        collectionView.backgroundColor = .black
     }
     
     func callRequest(query: String, page: Int) {
@@ -123,6 +123,7 @@ extension SearchViewController: UISearchBarDelegate {
         // 페이지 초기화 후 검색
         page = 1
         callRequest(query: searchBar.text!, page: page)
+        view.endEditing(true)
     }
 }
 
