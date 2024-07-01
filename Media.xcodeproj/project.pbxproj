@@ -36,6 +36,7 @@
 		24356B162C2C092C000D2DF1 /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24356B152C2C092C000D2DF1 /* BaseTableViewCell.swift */; };
 		24356B182C2C0E62000D2DF1 /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24356B172C2C0E62000D2DF1 /* BaseCollectionViewCell.swift */; };
 		24B3BD2A2C2EA2050088CDB7 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B3BD292C2EA2050088CDB7 /* BaseViewController.swift */; };
+		24B3BD562C3289B10088CDB7 /* NasaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B3BD552C3289B10088CDB7 /* NasaViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -67,6 +68,7 @@
 		24356B152C2C092C000D2DF1 /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
 		24356B172C2C0E62000D2DF1 /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
 		24B3BD292C2EA2050088CDB7 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		24B3BD552C3289B10088CDB7 /* NasaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NasaViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +107,7 @@
 			children = (
 				24356A9F2C2938C3000D2DF1 /* AppDelegate.swift */,
 				24356AA12C2938C3000D2DF1 /* SceneDelegate.swift */,
+				24B3BD552C3289B10088CDB7 /* NasaViewController.swift */,
 				24356B132C2C0884000D2DF1 /* Network */,
 				24356ACF2C29688E000D2DF1 /* Models */,
 				24356B052C2AB5DA000D2DF1 /* Extension */,
@@ -307,6 +310,7 @@
 				24356AB82C29391A000D2DF1 /* APIKey.swift in Sources */,
 				24356AA22C2938C3000D2DF1 /* SceneDelegate.swift in Sources */,
 				24356AE02C2986B4000D2DF1 /* RecommendViewController.swift in Sources */,
+				24B3BD562C3289B10088CDB7 /* NasaViewController.swift in Sources */,
 				24356AD32C2968C7000D2DF1 /* MainCreditCell.swift in Sources */,
 				24356ADC2C296E19000D2DF1 /* PosterImageCollectionViewCell.swift in Sources */,
 			);
