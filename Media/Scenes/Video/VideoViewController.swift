@@ -67,4 +67,10 @@ extension VideoViewController: UITableViewDelegate, UITableViewDataSource {
         cell.configureCell(data)
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = VideoWebViewController()
+        vc.video = videoList[indexPath.row]
+        navigationController?.pushViewController(vc, animated: true)
+    }
 }

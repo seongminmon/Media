@@ -40,6 +40,7 @@
 		24B3BD582C329D710088CDB7 /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B3BD572C329D710088CDB7 /* Video.swift */; };
 		24B3BD5B2C329EC00088CDB7 /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B3BD5A2C329EC00088CDB7 /* VideoViewController.swift */; };
 		24B3BD5D2C32A1590088CDB7 /* VideoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B3BD5C2C32A1590088CDB7 /* VideoTableViewCell.swift */; };
+		24B3BD5F2C32A4A30088CDB7 /* VideoWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B3BD5E2C32A4A30088CDB7 /* VideoWebViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -75,6 +76,7 @@
 		24B3BD572C329D710088CDB7 /* Video.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
 		24B3BD5A2C329EC00088CDB7 /* VideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoViewController.swift; sourceTree = "<group>"; };
 		24B3BD5C2C32A1590088CDB7 /* VideoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoTableViewCell.swift; sourceTree = "<group>"; };
+		24B3BD5E2C32A4A30088CDB7 /* VideoWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoWebViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -221,6 +223,7 @@
 			children = (
 				24B3BD5A2C329EC00088CDB7 /* VideoViewController.swift */,
 				24B3BD5C2C32A1590088CDB7 /* VideoTableViewCell.swift */,
+				24B3BD5E2C32A4A30088CDB7 /* VideoWebViewController.swift */,
 			);
 			path = Video;
 			sourceTree = "<group>";
@@ -317,6 +320,7 @@
 				24356B072C2AB9F2000D2DF1 /* ImageResponse.swift in Sources */,
 				24356ACD2C296836000D2DF1 /* ReuseIdentifierProtocol.swift in Sources */,
 				24356AC32C2941F6000D2DF1 /* TrendTableViewCell.swift in Sources */,
+				24B3BD5F2C32A4A30088CDB7 /* VideoWebViewController.swift in Sources */,
 				24356B042C2AA6AA000D2DF1 /* RecommendTableViewCell.swift in Sources */,
 				24356AD92C296D1E000D2DF1 /* SearchViewController.swift in Sources */,
 				24356AA02C2938C3000D2DF1 /* AppDelegate.swift in Sources */,
